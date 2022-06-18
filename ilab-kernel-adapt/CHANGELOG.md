@@ -18,3 +18,5 @@ Please follow the format listed in the 2022-04-22 entry.
 - ILAB Environment:
   - [pytest](https://docs.pytest.org/en/7.1.x/how-to/usage.html)
   - [omegaconf](https://github.com/omry/omegaconf)
+  - [black](https://github.com/psf/black)
+  - [tensorflow-addons](https://www.tensorflow.org/addons?hl=es-419)
