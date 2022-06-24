@@ -15,8 +15,13 @@ Please follow the format listed in the 2022-04-22 entry.
 
 ## 2022-06-17
 
-- ILAB Environment:
+- ILAB Kernel:
   - [pytest](https://docs.pytest.org/en/7.1.x/how-to/usage.html)
   - [omegaconf](https://github.com/omry/omegaconf)
   - [black](https://github.com/psf/black)
   - [tensorflow-addons](https://www.tensorflow.org/addons?hl=es-419)
+
+## 2022-06-23
+
+- ILAB Kernel:
+  - [contextily](https://contextily.readthedocs.io/en/latest/index.html)
