@@ -25,3 +25,9 @@ Please follow the format listed in the 2022-04-22 entry.
 
 - ILAB Kernel:
   - [contextily](https://contextily.readthedocs.io/en/latest/index.html)
+
+## 2022-06-29
+
+- ILAB kernel:
+  - [rio-cogeo](https://cogeotiff.github.io/rio-cogeo)
+  - [rio-viz](https://github.com/developmentseed/rio-viz)
