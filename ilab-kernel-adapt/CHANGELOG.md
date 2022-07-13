@@ -31,3 +31,11 @@ Please follow the format listed in the 2022-04-22 entry.
 - ILAB kernel:
   - [rio-cogeo](https://cogeotiff.github.io/rio-cogeo)
   - [rio-viz](https://github.com/developmentseed/rio-viz)
+
+## 2022-07-13
+
+- ILAB Kernel:
+  - [localtileserver](https://github.com/banesullivan/localtileserver)
+  - [jupyter-server-proxy](https://jupyter-server-proxy.readthedocs.io/en/latest/install.html)
+- ILAB Environment:
+  - [jupyter-server-proxy extension](https://jupyter-server-proxy.readthedocs.io/en/latest/install.html)
