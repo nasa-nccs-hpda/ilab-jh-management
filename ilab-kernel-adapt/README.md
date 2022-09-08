@@ -79,7 +79,12 @@ conda install -c conda-forge ipysheet
 
 ## How to Install Extensions
 
-TBD
+An example on how to install an extension is listed below.
+
+```bash
+jupyter labextension install dask-labextension
+jupyter serverextension enable --py --sys-prefix dask_labextension
+```
 
 ## Recovering an Environment
 
