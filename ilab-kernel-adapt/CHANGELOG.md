@@ -39,3 +39,8 @@ Please follow the format listed in the 2022-04-22 entry.
   - [jupyter-server-proxy](https://jupyter-server-proxy.readthedocs.io/en/latest/install.html)
 - ILAB Environment:
   - [jupyter-server-proxy extension](https://jupyter-server-proxy.readthedocs.io/en/latest/install.html)
+
+## 2022-09-14
+
+- ILAB Kernel:
+  - [dask-geopandas](https://github.com/geopandas/dask-geopandas)
