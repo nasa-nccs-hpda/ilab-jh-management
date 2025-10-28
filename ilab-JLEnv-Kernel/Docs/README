@@ -1,0 +1,64 @@
+Turnover from Savannah 10/28/25
+
+User id and S/W
+
+-Log into forest201
+
+sudo su - iluser
+cd /panfs/ccds02/app/modules/jupyter/ilab/
+Module load mamba
+
+Reference docs
+
+1) ilab-juplab-ENV-build-instructions
+2) pytorch-DEV-kernel-build-instructions
+3) Details-of-latest-fixes-between-juplabENV-and-Kernel (stream of consciousness)
+
+Directories
+
+Dev kernel link- in order see the “DEV kernel” in a JupyterLab session NB, you have to set the “kernel” sym link below to the Dev kernel you just created.
+
+[sstrong@forest201 dev]$ pwd
+/panfs/ccds02/app/modules/jupyter/ilab/dev
+[sstrong@forest201 dev]$ l
+total 600
+drwxr-sr-x  15 iluser ilab 4096 Sep 29 15:45 ..
+drwxr-sr-x. 13 iluser ilab 4096 Sep 29 15:44 .
+lrwxrwxrwx   1 iluser ilab   61 Sep 29 15:44 kernel -> /panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current
+
+ILab JupLab ENV prod and dev links
+
+[sstrong@forest201 jupyter-lab]$ pwd
+/panfs/ccds02/app/modules/jupyter/ilab/jupyter-lab
+[sstrong@forest201 jupyter-lab]$ l
+total 368
+drwxr-sr-x 15 iluser  ilab 4096 Sep 29 15:45 ..
+lrwxrwxrwx  1 sstrong ilab   74 Sep 12 10:10 prod -> /panfs/ccds02/app/modules/jupyter/ilab/jupyter-lab/ilab-juplab-ENV-current
+drwxrws--- 10 iluser  ilab 4096 Sep 12 10:10 .
+lrwxrwxrwx  1 iluser  ilab   74 Sep  8 19:13 dev -> /panfs/ccds02/app/modules/jupyter/ilab/jupyter-lab/ilab-juplab-ENV-current
+drwxr-s--- 17 iluser  ilab 4096 Sep  8 17:12 ilab-juplab-ENV-current
+
+
+Testing
+
+NBs-This suite could be increased. Always wanted to have more. 
+
+
+CUDA-compiled-version-test-DEV-kernel.ipynb
+ILAB-Kernel-Regression-Pytorch.ipynb
+ILAB-Kernel-Regression-TF.ipynb
+Localtileserver-banesullivan.ipyb
+test_r_kernel.ipyb
+Rapids
+
+
+Top annoyances
+
+-The ipywidgets, ipyleaflet dance between JupLab Env and kernel (see document 3 under “reference docs” above )
+-Having to uninstall torchvision and reinstall it.  (See document 3).
+-localtileserver “database error”. Can be solved by setting “PROJ_DATA” and “PROJ_LIB” at the top of your NB. (See document 3).
+-gdal does not load the whole gdal-lib in anymore it loads gdal-core and then you install plugins such as libgdal-hdf4 libgdal-hdf5. Also, make sure you have exact versions of gdal between JupLab Env and Dev kernel. (In document 3 you can search for gdal to see detail of the journey on that).
+
+Other notes
+
+-in document 3 all the output from the installation was captured from latest build. This is helpful when you encounter dependency issues and need to specify a specific version during the env or kernel build.
