@@ -47,8 +47,10 @@ Here's some basic ones:
 
 https://github.com/nasa-nccs-hpda/ilab-jh-management/tree/main/ilab-kernel-adapt/tests
 
-Rapids-the rapids_cudf_pandas_accelerator_mode.ipynb needs the accompanying parquet files. So co-locate the NB with files down this path..
-/explore/nobackup/projects/ilab/ilab_testing/ilab-jh-management/ilab-kernel-adapt/tests/rapids-23_10/NB-from-Jordan
+git clone --single-branch --branch main https://github.com/nasa-nccs-hpda/ilab-jh-management
+
+*note - the rapids_cudf_pandas_accelerator_mode.ipynb needs the accompanying parquet files.
+Mel has all the parquet files that need to be co-located with the NB.
 
 
 Top annoyances
