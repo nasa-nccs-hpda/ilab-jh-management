@@ -1,424 +1,346 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2822
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fnil\fcharset0 Menlo-Bold;\f2\fmodern\fcharset0 Courier;
-}
-{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red147\green139\blue5;\red202\green51\blue35;
-\red99\green92\blue2;\red57\green192\blue38;\red170\green171\blue37;\red0\green0\blue0;\red255\green255\blue255;
-\red255\green238\blue149;\red21\green102\blue47;}
-{\*\expandedcolortbl;;\csgray\c0;\cssrgb\c64268\c60430\c0;\cssrgb\c83899\c28663\c18026;
-\cssrgb\c46252\c43086\c0;\cssrgb\c25706\c77963\c19557;\cssrgb\c72331\c71682\c18599;\cssrgb\c0\c1\c1;\cssrgb\c100000\c100000\c99985;
-\cssrgb\c100000\c94118\c64706;\cssrgb\c7451\c46667\c23922;}
-\margl1440\margr1440\vieww24400\viewh11920\viewkind0
-\deftab720
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\pardirnatural\partightenfactor0
-
-\f0\fs36 \cf2 \CocoaLigature0 \
-\
 sudo su - iluser
-\fs40 \cf3 \
-cd 
-\fs36 \cf2 /panfs/ccds02/app/modules/jupyter/ilab/\
+cd /panfs/ccds02/app/modules/jupyter/ilab/
 Module load mamba
-\fs40 \cf3 \
-\
+
 1) Create the kernel
-\fs34 \cf2 \
-\
-micromamba 
-\f1\b \cf4 create
-\f0\b0 \cf2  -p /panfs/ccds02/app/modules/jupyter/ilab/<neww-pytorch-kernel-name> -c rapidsai -c conda-forge -c pytorch -c nvidia -c legate rapids=25.04 python=3.12 'cuda-version>=12.0,<=12.8' pytorch torchvision torchaudio pytorch-cuda pip xarray dask matplotlib numpy pandas scikit-learn netCDF4 ipympl nodejs gdal rasterio seaborn geoviews cartopy hvplot holoviews rioxarray mkl jupyter-dash pytest omegaconf black contextily rio-cogeo localtileserver jupyter-server-proxy dask-geopandas pooch pythreejs owslib cupynumeric optuna ipykernel ipyleaflet=0.19.2 ipytree bqplot plotnine mizani tiler hydra-core datasets webdataset rasterstats optuna dask-geopandas h5py pyarrow earthaccess huggingface_hub matplotlib-scalebar yacs timm torchgeo py-opencv earthengine-api hdf4 gdal libgdal-hdf4 libgdal-hdf5 pytorch-lightning torchmetrics\
-\
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\pardirnatural\partightenfactor0
 
-\fs40 \cf5 2) Activate the kernel and remove torchvision
-\fs34 \cf2 \
-\
-[iluser@forest201 ilab]$ mm activate ./pytorch-kernel-current\
-(/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current) [iluser@forest201 ilab]$ micromamba remove torchvision\
-Transaction\
-\
-  Prefix: /panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current\
-\
-  Removing specs:\
-\
-   - torchvision\
-\
-\
-  Package                        Version  Build                 Channel           Size\
-\uc0\u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
-  Remove:\
-\uc0\u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
-\
-  \cf4 - adwaita-icon-theme         \cf2      48.1  unix_0                conda-forge\cf6      Cached\cf2 \
-  \cf4 - aenum                      \cf2    3.1.15  pyhd8ed1ab_1          conda-forge\cf6      Cached\cf2 \
-  \cf4 - argcomplete                \cf2     3.6.2  pyhd8ed1ab_0          conda-forge\cf6      Cached\cf2 \
-  \cf4 - at-spi2-atk                \cf2    2.38.0  h0630a04_3            conda-forge\cf6      Cached\cf2 \
-  \cf4 - at-spi2-core               \cf2    2.40.3  h0630a04_0            conda-forge\cf6      Cached\cf2 \
-  \cf4 - atk-1.0                    \cf2    2.38.0  h04ea711_2            conda-forge\cf6      Cached\cf2 \
-  \cf4 - dataclasses                \cf2       0.8  pyhc8e2a94_3          conda-forge\cf6      Cached\cf2 \
-  \cf4 - docstring_parser           \cf2    0.17.0  pyhd8ed1ab_0          conda-forge\cf6      Cached\cf2 \
-  \cf4 - efficientnet-pytorch       \cf2     0.7.1  pyhd8ed1ab_1          conda-forge\cf6      Cached\cf2 \
-  \cf4 - einops                     \cf2     0.8.1  pyhd8ed1ab_0          conda-forge\cf6      Cached\cf2 \
-  \cf4 - epoxy                      \cf2    1.5.10  h166bdaf_1            conda-forge\cf6      Cached\cf2 \
-  \cf4 - glib                       \cf2    2.84.2  h6287aef_0            conda-forge\cf6      Cached\cf2 \
-  \cf4 - glib-tools                 \cf2    2.84.2  h4833e2c_0            conda-forge\cf6      Cached\cf2 \
-  \cf4 - gst-plugins-base           \cf2   1.24.11  h651a532_0            conda-forge\cf6      Cached\cf2 \
-  \cf4 - gstreamer                  \cf2   1.24.11  hc37bda9_0            conda-forge\cf6      Cached\cf2 \
-  \cf4 - gtk3                       \cf2   3.24.43  h0c6a113_5            conda-forge\cf6      Cached\cf2 \
-  \cf4 - hicolor-icon-theme         \cf2      0.17  ha770c72_2            conda-forge\cf6      Cached\cf2 \
-  \cf4 - jsonargparse               \cf2    4.40.1  pyhd8ed1ab_0          conda-forge\cf6      Cached\cf2 \
-  \cf4 - jsonnet                    \cf2    0.21.0  py312he346f12_1       conda-forge\cf6      Cached\cf2 \
-  \cf4 - kornia                     \cf2     0.8.1  pyhd8ed1ab_0          conda-forge\cf6      Cached\cf2 \
-  \cf4 - kornia-rs                  \cf2     0.1.9  py312he9d9d3d_2       conda-forge\cf6      Cached\cf2 \
-  \cf4 - libde265                   \cf2    1.0.15  h00ab1b0_0            conda-forge\cf6      Cached\cf2 \
-  \cf4 - libheif                    \cf2    1.19.7  gpl_hc18d805_100      conda-forge\cf6      Cached\cf2 \
-  \cf4 - libspatialindex            \cf2     2.1.0  he57a185_0            conda-forge\cf6      Cached\cf2 \
-  \cf4 - lightly                    \cf2   1.15.22  pyhd8ed1ab_0          conda-forge\cf6      Cached\cf2 \
-  \cf4 - lightly-utils              \cf2     0.0.2  pyhd8ed1ab_1          conda-forge\cf6      Cached\cf2 \
-  \cf4 - lightning                  \cf2     2.5.2  pyhd8ed1ab_0          conda-forge\cf6      Cached\cf2 \
-  \cf4 - munch                      \cf2     4.0.0  pyhd8ed1ab_1          conda-forge\cf6      Cached\cf2 \
-  \cf4 - pretrainedmodels           \cf2     0.7.4  pyhd8ed1ab_2          conda-forge\cf6      Cached\cf2 \
-  \cf4 - rtree                      \cf2     1.4.0  pyh11ca60a_1          conda-forge\cf6      Cached\cf2 \
-  \cf4 - safetensors                \cf2     0.5.3  py312h12e396e_0       conda-forge\cf6      Cached\cf2 \
-  \cf4 - segmentation-models-pytorch\cf2     0.5.0  pyh2a12c56_0          conda-forge\cf6      Cached\cf2 \
-  \cf4 - timm                       \cf2    1.0.19  pyhe01879c_0          conda-forge\cf6      Cached\cf2 \
-  \cf4 - torchgeo                   \cf2     0.7.1  pyhd8ed1ab_0          conda-forge\cf6      Cached\cf2 \
-  \cf4 - torchvision                \cf2    0.20.1  cpu_py312_hea98c79_6  conda-forge\cf6      Cached\cf2 \
-  \cf4 - typeshed-client            \cf2     2.4.0  pyhd8ed1ab_1          conda-forge\cf6      Cached\cf2 \
-  \cf4 - validators                 \cf2    0.35.0  pyhd8ed1ab_0          conda-forge\cf6      Cached\cf2 \
-  \cf4 - xorg-libxinerama           \cf2     1.1.5  h5888daf_1            conda-forge\cf6      Cached\cf2 \
-  \cf4 - xorg-libxshmfence          \cf2     1.3.3  hb9d3cd8_0            conda-forge\cf6      Cached\cf2 \
-\
-  Summary:\
-\
-  Remove: 39 packages\
-\
-  Total download: 0 B\
-\
-\uc0\u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
-\
-\
-Confirm changes: [Y/n] y\
-\
-Transaction starting\
-Unlinking torchgeo-0.7.1-pyhd8ed1ab_0\
-Unlinking typeshed-client-2.4.0-pyhd8ed1ab_1\
-Unlinking segmentation-models-pytorch-0.5.0-pyh2a12c56_0\
-Unlinking rtree-1.4.0-pyh11ca60a_1\
-Unlinking lightning-2.5.2-pyhd8ed1ab_0\
-Unlinking lightly-1.15.22-pyhd8ed1ab_0\
-Unlinking kornia-0.8.1-pyhd8ed1ab_0\
-Unlinking jsonargparse-4.40.1-pyhd8ed1ab_0\
-Unlinking einops-0.8.1-pyhd8ed1ab_0\
-Unlinking timm-1.0.19-pyhe01879c_0\
-Unlinking pretrainedmodels-0.7.4-pyhd8ed1ab_2\
-Unlinking efficientnet-pytorch-0.7.1-pyhd8ed1ab_1\
-Unlinking libspatialindex-2.1.0-he57a185_0\
-Unlinking lightly-utils-0.0.2-pyhd8ed1ab_1\
-Unlinking aenum-3.1.15-pyhd8ed1ab_1\
-Unlinking kornia-rs-0.1.9-py312he9d9d3d_2\
-Unlinking validators-0.35.0-pyhd8ed1ab_0\
-Unlinking jsonnet-0.21.0-py312he346f12_1\
-Unlinking docstring_parser-0.17.0-pyhd8ed1ab_0\
-Unlinking dataclasses-0.8-pyhc8e2a94_3\
-Unlinking argcomplete-3.6.2-pyhd8ed1ab_0\
-Unlinking safetensors-0.5.3-py312h12e396e_0\
-Unlinking munch-4.0.0-pyhd8ed1ab_1\
-Unlinking torchvision-0.20.1-cpu_py312_hea98c79_6\
-Unlinking gtk3-3.24.43-h0c6a113_5\
-Unlinking gst-plugins-base-1.24.11-h651a532_0\
-Unlinking adwaita-icon-theme-48.1-unix_0\
-Unlinking libheif-1.19.7-gpl_hc18d805_100\
-Unlinking xorg-libxinerama-1.1.5-h5888daf_1\
-Unlinking epoxy-1.5.10-h166bdaf_1\
-Unlinking at-spi2-atk-2.38.0-h0630a04_3\
-Unlinking xorg-libxshmfence-1.3.3-hb9d3cd8_0\
-Unlinking gstreamer-1.24.11-hc37bda9_0\
-Unlinking hicolor-icon-theme-0.17-ha770c72_2\
-Unlinking libde265-1.0.15-h00ab1b0_0\
-Unlinking atk-1.0-2.38.0-h04ea711_2\
-Unlinking at-spi2-core-2.40.3-h0630a04_0\
-Unlinking glib-2.84.2-h6287aef_0\
-Unlinking glib-tools-2.84.2-h4833e2c_0\
-\
-Transaction finished\
-\
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\pardirnatural\partightenfactor0
+micromamba create -p /panfs/ccds02/app/modules/jupyter/ilab/<neww-pytorch-kernel-name> -c rapidsai -c conda-forge -c pytorch -c nvidia -c legate rapids=25.04 python=3.12 'cuda-version>=12.0,<=12.8' pytorch torchvision torchaudio pytorch-cuda pip xarray dask matplotlib numpy pandas scikit-learn netCDF4 ipympl nodejs gdal rasterio seaborn geoviews cartopy hvplot holoviews rioxarray mkl jupyter-dash pytest omegaconf black contextily rio-cogeo localtileserver jupyter-server-proxy dask-geopandas pooch pythreejs owslib cupynumeric optuna ipykernel ipyleaflet=0.19.2 ipytree bqplot plotnine mizani tiler hydra-core datasets webdataset rasterstats optuna dask-geopandas h5py pyarrow earthaccess huggingface_hub matplotlib-scalebar yacs timm torchgeo py-opencv earthengine-api hdf4 gdal libgdal-hdf4 libgdal-hdf5 pytorch-lightning torchmetrics
 
-\fs40 \cf3 3) Reinstall torchvision
-\fs34 \cf2 \
-\
-(/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current) [iluser@forest201 ilab]$ micromamba install pytorch::torchvision\
-conda-forge/noarch                                  21.4MB @  15.6MB/s  1.4s\
-conda-forge/linux-64                                45.5MB @  22.2MB/s  2.0s\
-\
-Pinned packages:\
-\
-  - python=3.12\
-\
-\
-Transaction\
-\
-  Prefix: /panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current\
-\
-  Updating specs:\
-\
-   - pytorch::torchvision\
-\
-\
-  Package                         Version  Build                         Channel           Size\
-\uc0\u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
-  Install:\
-\uc0\u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
-\
-  \cf6 + blas                       \cf2        1.0  mkl                           conda-forge        1kB\
-  \cf6 + large-image                \cf2    1.32.11  pyhd8ed1ab_0                  conda-forge      100kB\
-  \cf6 + large_image_source_rasterio\cf2    1.32.11  pyhd8ed1ab_0                  conda-forge       24kB\
-  \cf6 + palettable                 \cf2      3.3.3  pyhd8ed1ab_1                  conda-forge       80kB\
-  \cf6 + pytorch-mutex              \cf2        1.0  cuda                          pytorch            3kB\
-  \cf6 + torchtriton                \cf2      3.0.0  py312                         pytorch          245MB\
-  \cf6 + torchvision                \cf2     0.19.0  py312_cu124                   pytorch            9MB\
-\
-  Remove:\
-\uc0\u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
-\
-  \cf4 - libtorch                   \cf2      2.5.1  cpu_mkl_hf6ddc5a_117          conda-forge\cf6      Cached\cf2 \
-  \cf4 - numexpr                    \cf2     2.10.2  mkl_py312hacae085_0           conda-forge\cf6      Cached\cf2 \
-  \cf4 - rio-tiler                  \cf2      7.8.1  pyhd8ed1ab_0                  conda-forge\cf6      Cached\cf2 \
-\
-  Change:\
-\uc0\u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
-\
-  \cf4 - libblas                    \cf2      3.9.0  32_hfdb39a5_mkl               conda-forge\cf6      Cached\cf2 \
-  \cf6 + libblas                    \cf2      3.9.0  1_h86c2bf4_netlib             conda-forge      203kB\
-  \cf4 - libcblas                   \cf2      3.9.0  32_h372d94f_mkl               conda-forge\cf6      Cached\cf2 \
-  \cf6 + libcblas                   \cf2      3.9.0  12_h832b8c9_netlib            conda-forge       54kB\
-  \cf4 - liblapack                  \cf2      3.9.0  32_hc41d3b0_mkl               conda-forge\cf6      Cached\cf2 \
-  \cf6 + liblapack                  \cf2      3.9.0  12_hd37a5e2_netlib            conda-forge        3MB\
-  \cf4 - liblapacke                 \cf2      3.9.0  32_hbc6e62b_mkl               conda-forge\cf6      Cached\cf2 \
-  \cf6 + liblapacke                 \cf2      3.9.0  12_hce4cc19_netlib            conda-forge      496kB\
-\
-  Downgrade:\
-\uc0\u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
-\
-  \cf4 - libopenblas                \cf2     0.3.23  openmp_h2a4e791_0             conda-forge\cf6      Cached\cf2 \
-  \cf6 + libopenblas                \cf2     0.3.21  openmp_h74cd887_3             conda-forge       11MB\
-  \cf4 - llvm-openmp                \cf2     20.1.8  h4922eb0_0                    conda-forge\cf6      Cached\cf2 \
-  \cf6 + llvm-openmp                \cf2     15.0.7  h0cdce71_0                    conda-forge        3MB\
-  \cf4 - localtileserver            \cf2     0.10.6  pyhd8ed1ab_0                  conda-forge\cf6      Cached\cf2 \
-  \cf6 + localtileserver            \cf2      0.7.1  pyhd8ed1ab_1                  conda-forge       12MB\
-  \cf4 - mkl                        \cf2   2024.2.2  ha770c72_16                   conda-forge\cf6      Cached\cf2 \
-  \cf6 + mkl                        \cf2   2023.0.0  h84fe81f_26648                conda-forge      161MB\
-  \cf4 - openblas                   \cf2     0.3.23  openmp_hef934df_0             conda-forge\cf6      Cached\cf2 \
-  \cf6 + openblas                   \cf2     0.3.21  openmp_h53a8fd6_3             conda-forge       11MB\
-  \cf4 - pytorch                    \cf2      2.5.1  cpu_mkl_py312_h6a7998d_117    conda-forge\cf6      Cached\cf2 \
-  \cf6 + pytorch                    \cf2      2.4.0  py3.12_cuda12.4_cudnn9.1.0_0  pytorch            1GB\
-  \cf4 - torchaudio                 \cf2      2.5.1  cpu_py312h6db6e6d_0           conda-forge\cf6      Cached\cf2 \
-  \cf6 + torchaudio                 \cf2      2.4.0  py312_cu124                   pytorch            7MB\
-\
-  Summary:\
-\
-  Install: 7 packages\
-  Remove: 3 packages\
-  Change: 4 packages\
-  Downgrade: 7 packages\
-\
-  Total download: 2GB\
-\
-\uc0\u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
-\
-\
-Confirm changes: [Y/n] y\
-\
-Transaction starting\
-openblas                                            11.4MB @  13.9MB/s  0.8s\
-libopenblas                                         10.6MB @  22.0MB/s  0.5s\
-torchvision                                          8.8MB @  24.0MB/s  0.4s\
-localtileserver                                     12.0MB @   6.7MB/s  1.8s\
-llvm-openmp                                          3.3MB @  11.7MB/s  0.3s\
-torchaudio                                           6.7MB @  13.7MB/s  0.5s\
-liblapacke                                         495.8kB @   2.3MB/s  0.1s\
-libblas                                            203.3kB @   2.9MB/s  0.1s\
-liblapack                                            2.8MB @   5.2MB/s  0.3s\
-large-image                                         99.8kB @ 528.0kB/s  0.2s\
-palettable                                          79.9kB @  ??.?MB/s  0.2s\
-libcblas                                            53.9kB @  ??.?MB/s  0.1s\
-large_image_source_rasterio                         24.0kB @ 389.8kB/s  0.1s\
-pytorch-mutex                                        2.9kB @  ??.?MB/s  0.1s\
-blas                                                 1.4kB @  ??.?MB/s  0.1s\
-mkl                                                161.4MB @  28.7MB/s  5.6s\
-torchtriton                                        244.9MB @  40.7MB/s  5.9s\
-pytorch                                              1.4GB @  48.8MB/s 29.5s\
-Unlinking rio-tiler-7.8.1-pyhd8ed1ab_0\
-Unlinking numexpr-2.10.2-mkl_py312hacae085_0\
-Unlinking libtorch-2.5.1-cpu_mkl_hf6ddc5a_117\
-Unlinking localtileserver-0.10.6-pyhd8ed1ab_0\
-Unlinking libblas-3.9.0-32_hfdb39a5_mkl\
-Unlinking libcblas-3.9.0-32_h372d94f_mkl\
-Unlinking liblapack-3.9.0-32_hc41d3b0_mkl\
-Unlinking llvm-openmp-20.1.8-h4922eb0_0\
-Unlinking liblapacke-3.9.0-32_hbc6e62b_mkl\
-Unlinking libopenblas-0.3.23-openmp_h2a4e791_0\
-Unlinking mkl-2024.2.2-ha770c72_16\
-Unlinking openblas-0.3.23-openmp_hef934df_0\
-Unlinking pytorch-2.5.1-cpu_mkl_py312_h6a7998d_117\
-Unlinking torchaudio-2.5.1-cpu_py312h6db6e6d_0\
-Linking pytorch-mutex-1.0-cuda\
-Linking palettable-3.3.3-pyhd8ed1ab_1\
-Linking large-image-1.32.11-pyhd8ed1ab_0\
-Linking large_image_source_rasterio-1.32.11-pyhd8ed1ab_0\
-Linking localtileserver-0.7.1-pyhd8ed1ab_1\
-Linking libblas-3.9.0-1_h86c2bf4_netlib\
-Linking libcblas-3.9.0-12_h832b8c9_netlib\
-Linking liblapack-3.9.0-12_hd37a5e2_netlib\
-Linking llvm-openmp-15.0.7-h0cdce71_0\
-Linking liblapacke-3.9.0-12_hce4cc19_netlib\
-Linking libopenblas-0.3.21-openmp_h74cd887_3\
-Linking mkl-2023.0.0-h84fe81f_26648\
-Linking openblas-0.3.21-openmp_h53a8fd6_3\
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\pardirnatural\partightenfactor0
+2) Activate the kernel and remove torchvision
 
-\f1\b \cf7 warning  libmamba
-\f0\b0 \cf2  [openblas-0.3.21-openmp_h53a8fd6_3] The following files were already present in the environment:\
-    - include/cblas.h\
-    - include/lapack.h\
-    - include/lapacke.h\
-    - include/lapacke_config.h\
-    - include/lapacke_mangling.h\
-    - include/lapacke_utils.h\
-Linking blas-1.0-mkl\
-Linking pytorch-2.4.0-py3.12_cuda12.4_cudnn9.1.0_0\
-Linking torchtriton-3.0.0-py312\
-Linking torchaudio-2.4.0-py312_cu124\
-Linking torchvision-0.19.0-py312_cu124\
-\
-Transaction finished\
-\
-(/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current) [iluser@forest201 ilab]$ mm list |grep torch\
-List of packages in environment: "/panfs/ccds02/app/modules/jupyter/ilab/py
-\f1\b \cf4 torch
-\f0\b0 \cf2 -kernel-current"\
-  libopenvino-py
-\f1\b \cf4 torch
-\f0\b0 \cf2 -frontend          2025.0.0        h5888daf_3                           conda-forge\
-  py
-\f1\b \cf4 torch
-\f0\b0 \cf2                                2.4.0           py3.12_cuda12.4_cudnn9.1.0_0         py
-\f1\b \cf4 torch
-\f0\b0 \cf2     \
-  py
-\f1\b \cf4 torch
-\f0\b0 \cf2 -cuda                          12.4            hc786d27_7                           py
-\f1\b \cf4 torch
-\f0\b0 \cf2     \
-  py
-\f1\b \cf4 torch
-\f0\b0 \cf2 -lightning                     2.5.2           pyh2a12c56_0                         conda-forge\
-  py
-\f1\b \cf4 torch
-\f0\b0 \cf2 -mutex                         1.0             cuda                                 py
-\f1\b \cf4 torch
-\f0\b0 \cf2     \
-  
-\f1\b \cf4 torch
-\f0\b0 \cf2 audio                            2.4.0           py312_cu124                          py
-\f1\b \cf4 torch
-\f0\b0 \cf2     \
-  
-\f1\b \cf4 torch
-\f0\b0 \cf2 metrics                          1.8.0           pyhd8ed1ab_0                         conda-forge\
-  
-\f1\b \cf4 torch
-\f0\b0 \cf2 triton                           3.0.0           py312                                py
-\f1\b \cf4 torch
-\f0\b0 \cf2     \
-  
-\f1\b \cf4 torch
-\f0\b0 \cf2 vision                           0.19.0          py312_cu124                          py
-\f1\b \cf4 torch
-\f0\b0 \cf2     \
-(/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current) [iluser@forest201 ilab]$ mm deactivate\
-[iluser@forest201 ilab]$ mm activate ./pytorch-kernel-current\
-(/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current) [iluser@forest201 ilab]$ micromamba list |grep shap\
-  
-\f1\b \cf4 shap
-\f0\b0 \cf2 ely                               2.0.7           py312h21f5128_1                      conda-forge\
-(/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current) [iluser@forest201 ilab]$ \
-(/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current) [iluser@forest201 ilab]$ micromamba install -c conda-forge shap\
-conda-forge/noarch                                  21.4MB @  16.4MB/s  1.3s\
-conda-forge/linux-64                                45.5MB @  21.4MB/s  2.1s\
-\
-Pinned packages:\
-\
-  - python=3.12\
-\
-\
-Transaction\
-\
-  Prefix: /panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current\
-\
-  Updating specs:\
-\
-   - shap\
-\
-\
-  Package   Version  Build                Channel         Size\
-\uc0\u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
-  Install:\
-\uc0\u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
-\
-  \cf6 + shap  \cf2    0.48.0  cpu_py312hc6e6151_1  conda-forge      3MB\
-  \cf6 + slicer\cf2     0.0.8  pyhd8ed1ab_0         conda-forge     20kB\
-\
-  Summary:\
-\
-  Install: 2 packages\
-\
-  Total download: 3MB\
-\
-\uc0\u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
-\
-\
-Confirm changes: [Y/n] y\
-\
-Transaction starting\
-slicer                                              20.0kB @  66.6kB/s  0.2s\
-shap                                                 3.3MB @   7.8MB/s  0.3s\
-Linking slicer-0.0.8-pyhd8ed1ab_0\
-Linking shap-0.48.0-cpu_py312hc6e6151_1\
-\
-Transaction finished\
-\
-(/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current) [iluser@forest201 ilab]$ micromamba list |grep shap\
-  
-\f1\b \cf4 shap
-\f0\b0 \cf2                                   0.48.0          cpu_py312hc6e6151_1                  conda-forge\
-  
-\f1\b \cf4 shap
-\f0\b0 \cf2 ely                               2.0.7           py312h21f5128_1                      conda-forge\
-(/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current) [iluser@forest201 ilab]$ mm deactivate\
-\
-\
-INSTALL timm cause torchvision took it out.\
-\
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\pardirnatural\partightenfactor0
+[iluser@forest201 ilab]$ mm activate ./pytorch-kernel-current
+(/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current) [iluser@forest201 ilab]$ micromamba remove torchvision
+Transaction
 
-\fs40 \cf3 4) Install timm package (because uninstall torchvision takes it out)
-\fs34 \cf2 \
-\
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\pardirnatural\partightenfactor0
+  Prefix: /panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current
 
-\f2 \cf8 \cb9 (/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current) [iluser@forest201 ilab]$ micromamba install conda-forge::timm\cf10 \cb11 \
-\
-\
-\cf8 \cb9   Package        Version  Build            Channel           Size\
+  Removing specs:
 
-\f0 \uc0\u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 
-\f2 \
-  Install:\
+   - torchvision
 
-\f0 \uc0\u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 
-\f2 \
-\
-  + safetensors    0.5.3  py312h12e396e_0  conda-forge     Cached\
-  + timm          1.0.19  pyhe01879c_0     conda-forge     Cached\cf10 \cb11 \
-}
+
+  Package                        Version  Build                 Channel           Size
+────────────────────────────────────────────────────────────────────────────────────────
+  Remove:
+────────────────────────────────────────────────────────────────────────────────────────
+
+  - adwaita-icon-theme              48.1  unix_0                conda-forge     Cached
+  - aenum                         3.1.15  pyhd8ed1ab_1          conda-forge     Cached
+  - argcomplete                    3.6.2  pyhd8ed1ab_0          conda-forge     Cached
+  - at-spi2-atk                   2.38.0  h0630a04_3            conda-forge     Cached
+  - at-spi2-core                  2.40.3  h0630a04_0            conda-forge     Cached
+  - atk-1.0                       2.38.0  h04ea711_2            conda-forge     Cached
+  - dataclasses                      0.8  pyhc8e2a94_3          conda-forge     Cached
+  - docstring_parser              0.17.0  pyhd8ed1ab_0          conda-forge     Cached
+  - efficientnet-pytorch           0.7.1  pyhd8ed1ab_1          conda-forge     Cached
+  - einops                         0.8.1  pyhd8ed1ab_0          conda-forge     Cached
+  - epoxy                         1.5.10  h166bdaf_1            conda-forge     Cached
+  - glib                          2.84.2  h6287aef_0            conda-forge     Cached
+  - glib-tools                    2.84.2  h4833e2c_0            conda-forge     Cached
+  - gst-plugins-base             1.24.11  h651a532_0            conda-forge     Cached
+  - gstreamer                    1.24.11  hc37bda9_0            conda-forge     Cached
+  - gtk3                         3.24.43  h0c6a113_5            conda-forge     Cached
+  - hicolor-icon-theme              0.17  ha770c72_2            conda-forge     Cached
+  - jsonargparse                  4.40.1  pyhd8ed1ab_0          conda-forge     Cached
+  - jsonnet                       0.21.0  py312he346f12_1       conda-forge     Cached
+  - kornia                         0.8.1  pyhd8ed1ab_0          conda-forge     Cached
+  - kornia-rs                      0.1.9  py312he9d9d3d_2       conda-forge     Cached
+  - libde265                      1.0.15  h00ab1b0_0            conda-forge     Cached
+  - libheif                       1.19.7  gpl_hc18d805_100      conda-forge     Cached
+  - libspatialindex                2.1.0  he57a185_0            conda-forge     Cached
+  - lightly                      1.15.22  pyhd8ed1ab_0          conda-forge     Cached
+  - lightly-utils                  0.0.2  pyhd8ed1ab_1          conda-forge     Cached
+  - lightning                      2.5.2  pyhd8ed1ab_0          conda-forge     Cached
+  - munch                          4.0.0  pyhd8ed1ab_1          conda-forge     Cached
+  - pretrainedmodels               0.7.4  pyhd8ed1ab_2          conda-forge     Cached
+  - rtree                          1.4.0  pyh11ca60a_1          conda-forge     Cached
+  - safetensors                    0.5.3  py312h12e396e_0       conda-forge     Cached
+  - segmentation-models-pytorch    0.5.0  pyh2a12c56_0          conda-forge     Cached
+  - timm                          1.0.19  pyhe01879c_0          conda-forge     Cached
+  - torchgeo                       0.7.1  pyhd8ed1ab_0          conda-forge     Cached
+  - torchvision                   0.20.1  cpu_py312_hea98c79_6  conda-forge     Cached
+  - typeshed-client                2.4.0  pyhd8ed1ab_1          conda-forge     Cached
+  - validators                    0.35.0  pyhd8ed1ab_0          conda-forge     Cached
+  - xorg-libxinerama               1.1.5  h5888daf_1            conda-forge     Cached
+  - xorg-libxshmfence              1.3.3  hb9d3cd8_0            conda-forge     Cached
+
+  Summary:
+
+  Remove: 39 packages
+
+  Total download: 0 B
+
+────────────────────────────────────────────────────────────────────────────────────────
+
+
+Confirm changes: [Y/n] y
+
+Transaction starting
+Unlinking torchgeo-0.7.1-pyhd8ed1ab_0
+Unlinking typeshed-client-2.4.0-pyhd8ed1ab_1
+Unlinking segmentation-models-pytorch-0.5.0-pyh2a12c56_0
+Unlinking rtree-1.4.0-pyh11ca60a_1
+Unlinking lightning-2.5.2-pyhd8ed1ab_0
+Unlinking lightly-1.15.22-pyhd8ed1ab_0
+Unlinking kornia-0.8.1-pyhd8ed1ab_0
+Unlinking jsonargparse-4.40.1-pyhd8ed1ab_0
+Unlinking einops-0.8.1-pyhd8ed1ab_0
+Unlinking timm-1.0.19-pyhe01879c_0
+Unlinking pretrainedmodels-0.7.4-pyhd8ed1ab_2
+Unlinking efficientnet-pytorch-0.7.1-pyhd8ed1ab_1
+Unlinking libspatialindex-2.1.0-he57a185_0
+Unlinking lightly-utils-0.0.2-pyhd8ed1ab_1
+Unlinking aenum-3.1.15-pyhd8ed1ab_1
+Unlinking kornia-rs-0.1.9-py312he9d9d3d_2
+Unlinking validators-0.35.0-pyhd8ed1ab_0
+Unlinking jsonnet-0.21.0-py312he346f12_1
+Unlinking docstring_parser-0.17.0-pyhd8ed1ab_0
+Unlinking dataclasses-0.8-pyhc8e2a94_3
+Unlinking argcomplete-3.6.2-pyhd8ed1ab_0
+Unlinking safetensors-0.5.3-py312h12e396e_0
+Unlinking munch-4.0.0-pyhd8ed1ab_1
+Unlinking torchvision-0.20.1-cpu_py312_hea98c79_6
+Unlinking gtk3-3.24.43-h0c6a113_5
+Unlinking gst-plugins-base-1.24.11-h651a532_0
+Unlinking adwaita-icon-theme-48.1-unix_0
+Unlinking libheif-1.19.7-gpl_hc18d805_100
+Unlinking xorg-libxinerama-1.1.5-h5888daf_1
+Unlinking epoxy-1.5.10-h166bdaf_1
+Unlinking at-spi2-atk-2.38.0-h0630a04_3
+Unlinking xorg-libxshmfence-1.3.3-hb9d3cd8_0
+Unlinking gstreamer-1.24.11-hc37bda9_0
+Unlinking hicolor-icon-theme-0.17-ha770c72_2
+Unlinking libde265-1.0.15-h00ab1b0_0
+Unlinking atk-1.0-2.38.0-h04ea711_2
+Unlinking at-spi2-core-2.40.3-h0630a04_0
+Unlinking glib-2.84.2-h6287aef_0
+Unlinking glib-tools-2.84.2-h4833e2c_0
+
+Transaction finished
+
+3) Reinstall torchvision
+
+(/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current) [iluser@forest201 ilab]$ micromamba install pytorch::torchvision
+conda-forge/noarch                                  21.4MB @  15.6MB/s  1.4s
+conda-forge/linux-64                                45.5MB @  22.2MB/s  2.0s
+
+Pinned packages:
+
+  - python=3.12
+
+
+Transaction
+
+  Prefix: /panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current
+
+  Updating specs:
+
+   - pytorch::torchvision
+
+
+  Package                         Version  Build                         Channel           Size
+─────────────────────────────────────────────────────────────────────────────────────────────────
+  Install:
+─────────────────────────────────────────────────────────────────────────────────────────────────
+
+  + blas                              1.0  mkl                           conda-forge        1kB
+  + large-image                   1.32.11  pyhd8ed1ab_0                  conda-forge      100kB
+  + large_image_source_rasterio   1.32.11  pyhd8ed1ab_0                  conda-forge       24kB
+  + palettable                      3.3.3  pyhd8ed1ab_1                  conda-forge       80kB
+  + pytorch-mutex                     1.0  cuda                          pytorch            3kB
+  + torchtriton                     3.0.0  py312                         pytorch          245MB
+  + torchvision                    0.19.0  py312_cu124                   pytorch            9MB
+
+  Remove:
+─────────────────────────────────────────────────────────────────────────────────────────────────
+
+  - libtorch                        2.5.1  cpu_mkl_hf6ddc5a_117          conda-forge     Cached
+  - numexpr                        2.10.2  mkl_py312hacae085_0           conda-forge     Cached
+  - rio-tiler                       7.8.1  pyhd8ed1ab_0                  conda-forge     Cached
+
+  Change:
+─────────────────────────────────────────────────────────────────────────────────────────────────
+
+  - libblas                         3.9.0  32_hfdb39a5_mkl               conda-forge     Cached
+  + libblas                         3.9.0  1_h86c2bf4_netlib             conda-forge      203kB
+  - libcblas                        3.9.0  32_h372d94f_mkl               conda-forge     Cached
+  + libcblas                        3.9.0  12_h832b8c9_netlib            conda-forge       54kB
+  - liblapack                       3.9.0  32_hc41d3b0_mkl               conda-forge     Cached
+  + liblapack                       3.9.0  12_hd37a5e2_netlib            conda-forge        3MB
+  - liblapacke                      3.9.0  32_hbc6e62b_mkl               conda-forge     Cached
+  + liblapacke                      3.9.0  12_hce4cc19_netlib            conda-forge      496kB
+
+  Downgrade:
+─────────────────────────────────────────────────────────────────────────────────────────────────
+
+  - libopenblas                    0.3.23  openmp_h2a4e791_0             conda-forge     Cached
+  + libopenblas                    0.3.21  openmp_h74cd887_3             conda-forge       11MB
+  - llvm-openmp                    20.1.8  h4922eb0_0                    conda-forge     Cached
+  + llvm-openmp                    15.0.7  h0cdce71_0                    conda-forge        3MB
+  - localtileserver                0.10.6  pyhd8ed1ab_0                  conda-forge     Cached
+  + localtileserver                 0.7.1  pyhd8ed1ab_1                  conda-forge       12MB
+  - mkl                          2024.2.2  ha770c72_16                   conda-forge     Cached
+  + mkl                          2023.0.0  h84fe81f_26648                conda-forge      161MB
+  - openblas                       0.3.23  openmp_hef934df_0             conda-forge     Cached
+  + openblas                       0.3.21  openmp_h53a8fd6_3             conda-forge       11MB
+  - pytorch                         2.5.1  cpu_mkl_py312_h6a7998d_117    conda-forge     Cached
+  + pytorch                         2.4.0  py3.12_cuda12.4_cudnn9.1.0_0  pytorch            1GB
+  - torchaudio                      2.5.1  cpu_py312h6db6e6d_0           conda-forge     Cached
+  + torchaudio                      2.4.0  py312_cu124                   pytorch            7MB
+
+  Summary:
+
+  Install: 7 packages
+  Remove: 3 packages
+  Change: 4 packages
+  Downgrade: 7 packages
+
+  Total download: 2GB
+
+─────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+Confirm changes: [Y/n] y
+
+Transaction starting
+openblas                                            11.4MB @  13.9MB/s  0.8s
+libopenblas                                         10.6MB @  22.0MB/s  0.5s
+torchvision                                          8.8MB @  24.0MB/s  0.4s
+localtileserver                                     12.0MB @   6.7MB/s  1.8s
+llvm-openmp                                          3.3MB @  11.7MB/s  0.3s
+torchaudio                                           6.7MB @  13.7MB/s  0.5s
+liblapacke                                         495.8kB @   2.3MB/s  0.1s
+libblas                                            203.3kB @   2.9MB/s  0.1s
+liblapack                                            2.8MB @   5.2MB/s  0.3s
+large-image                                         99.8kB @ 528.0kB/s  0.2s
+palettable                                          79.9kB @  ??.?MB/s  0.2s
+libcblas                                            53.9kB @  ??.?MB/s  0.1s
+large_image_source_rasterio                         24.0kB @ 389.8kB/s  0.1s
+pytorch-mutex                                        2.9kB @  ??.?MB/s  0.1s
+blas                                                 1.4kB @  ??.?MB/s  0.1s
+mkl                                                161.4MB @  28.7MB/s  5.6s
+torchtriton                                        244.9MB @  40.7MB/s  5.9s
+pytorch                                              1.4GB @  48.8MB/s 29.5s
+Unlinking rio-tiler-7.8.1-pyhd8ed1ab_0
+Unlinking numexpr-2.10.2-mkl_py312hacae085_0
+Unlinking libtorch-2.5.1-cpu_mkl_hf6ddc5a_117
+Unlinking localtileserver-0.10.6-pyhd8ed1ab_0
+Unlinking libblas-3.9.0-32_hfdb39a5_mkl
+Unlinking libcblas-3.9.0-32_h372d94f_mkl
+Unlinking liblapack-3.9.0-32_hc41d3b0_mkl
+Unlinking llvm-openmp-20.1.8-h4922eb0_0
+Unlinking liblapacke-3.9.0-32_hbc6e62b_mkl
+Unlinking libopenblas-0.3.23-openmp_h2a4e791_0
+Unlinking mkl-2024.2.2-ha770c72_16
+Unlinking openblas-0.3.23-openmp_hef934df_0
+Unlinking pytorch-2.5.1-cpu_mkl_py312_h6a7998d_117
+Unlinking torchaudio-2.5.1-cpu_py312h6db6e6d_0
+Linking pytorch-mutex-1.0-cuda
+Linking palettable-3.3.3-pyhd8ed1ab_1
+Linking large-image-1.32.11-pyhd8ed1ab_0
+Linking large_image_source_rasterio-1.32.11-pyhd8ed1ab_0
+Linking localtileserver-0.7.1-pyhd8ed1ab_1
+Linking libblas-3.9.0-1_h86c2bf4_netlib
+Linking libcblas-3.9.0-12_h832b8c9_netlib
+Linking liblapack-3.9.0-12_hd37a5e2_netlib
+Linking llvm-openmp-15.0.7-h0cdce71_0
+Linking liblapacke-3.9.0-12_hce4cc19_netlib
+Linking libopenblas-0.3.21-openmp_h74cd887_3
+Linking mkl-2023.0.0-h84fe81f_26648
+Linking openblas-0.3.21-openmp_h53a8fd6_3
+warning  libmamba [openblas-0.3.21-openmp_h53a8fd6_3] The following files were already present in the environment:
+    - include/cblas.h
+    - include/lapack.h
+    - include/lapacke.h
+    - include/lapacke_config.h
+    - include/lapacke_mangling.h
+    - include/lapacke_utils.h
+Linking blas-1.0-mkl
+Linking pytorch-2.4.0-py3.12_cuda12.4_cudnn9.1.0_0
+Linking torchtriton-3.0.0-py312
+Linking torchaudio-2.4.0-py312_cu124
+Linking torchvision-0.19.0-py312_cu124
+
+Transaction finished
+
+(/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current) [iluser@forest201 ilab]$ mm list |grep torch
+List of packages in environment: "/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current"
+  libopenvino-pytorch-frontend          2025.0.0        h5888daf_3                           conda-forge
+  pytorch                               2.4.0           py3.12_cuda12.4_cudnn9.1.0_0         pytorch    
+  pytorch-cuda                          12.4            hc786d27_7                           pytorch    
+  pytorch-lightning                     2.5.2           pyh2a12c56_0                         conda-forge
+  pytorch-mutex                         1.0             cuda                                 pytorch    
+  torchaudio                            2.4.0           py312_cu124                          pytorch    
+  torchmetrics                          1.8.0           pyhd8ed1ab_0                         conda-forge
+  torchtriton                           3.0.0           py312                                pytorch    
+  torchvision                           0.19.0          py312_cu124                          pytorch    
+(/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current) [iluser@forest201 ilab]$ mm deactivate
+[iluser@forest201 ilab]$ mm activate ./pytorch-kernel-current
+(/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current) [iluser@forest201 ilab]$ micromamba list |grep shap
+  shapely                               2.0.7           py312h21f5128_1                      conda-forge
+(/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current) [iluser@forest201 ilab]$ 
+(/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current) [iluser@forest201 ilab]$ micromamba install -c conda-forge shap
+conda-forge/noarch                                  21.4MB @  16.4MB/s  1.3s
+conda-forge/linux-64                                45.5MB @  21.4MB/s  2.1s
+
+Pinned packages:
+
+  - python=3.12
+
+
+Transaction
+
+  Prefix: /panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current
+
+  Updating specs:
+
+   - shap
+
+
+  Package   Version  Build                Channel         Size
+────────────────────────────────────────────────────────────────
+  Install:
+────────────────────────────────────────────────────────────────
+
+  + shap     0.48.0  cpu_py312hc6e6151_1  conda-forge      3MB
+  + slicer    0.0.8  pyhd8ed1ab_0         conda-forge     20kB
+
+  Summary:
+
+  Install: 2 packages
+
+  Total download: 3MB
+
+────────────────────────────────────────────────────────────────
+
+
+Confirm changes: [Y/n] y
+
+Transaction starting
+slicer                                              20.0kB @  66.6kB/s  0.2s
+shap                                                 3.3MB @   7.8MB/s  0.3s
+Linking slicer-0.0.8-pyhd8ed1ab_0
+Linking shap-0.48.0-cpu_py312hc6e6151_1
+
+Transaction finished
+
+(/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current) [iluser@forest201 ilab]$ micromamba list |grep shap
+  shap                                  0.48.0          cpu_py312hc6e6151_1                  conda-forge
+  shapely                               2.0.7           py312h21f5128_1                      conda-forge
+(/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current) [iluser@forest201 ilab]$ mm deactivate
+
+
+INSTALL timm cause torchvision took it out.
+
+4) Install timm package (because uninstall torchvision takes it out)
+
+(/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current) [iluser@forest201 ilab]$ micromamba install conda-forge::timm
+
+
+  Package        Version  Build            Channel           Size
+───────────────────────────────────────────────────────────────────
+  Install:
+───────────────────────────────────────────────────────────────────
+
+  + safetensors    0.5.3  py312h12e396e_0  conda-forge     Cached
+  + timm          1.0.19  pyhe01879c_0     conda-forge     Cached
