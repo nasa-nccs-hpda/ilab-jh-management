@@ -41,15 +41,14 @@ drwxr-s--- 17 iluser  ilab 4096 Sep  8 17:12 ilab-juplab-ENV-current
 
 Testing
 
-NBs-This suite could be increased. Always wanted to have more. 
+NBs-This suite could be increased. Test all other NBs in the repo as see fit.
 
+Here's some basic ones: 
 
-CUDA-compiled-version-test-DEV-kernel.ipynb
-ILAB-Kernel-Regression-Pytorch.ipynb
-ILAB-Kernel-Regression-TF.ipynb
-Localtileserver-banesullivan.ipyb
-test_r_kernel.ipyb
-Rapids
+https://github.com/nasa-nccs-hpda/ilab-jh-management/tree/main/ilab-kernel-adapt/tests
+
+For Rapids test:
+/explore/nobackup/projects/ilab/ilab_testing/ilab-jh-management/ilab-kernel-adapt/tests/rapids-23_10/NB-from-Jordan
 
 
 Top annoyances
