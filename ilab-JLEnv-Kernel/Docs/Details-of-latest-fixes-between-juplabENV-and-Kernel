@@ -1,0 +1,1221 @@
+
+
+Trying to fix this:
+
+From localtileserver import TileClient,get_leaflet_tile_layer, examples
+From ipyleaflet import Map
+Client = examples.get_san_francisco() #use example data
+t= get_leaflet_tile_layer(client)
+m = Map(center=client.cent(), zoom=client.default_zoom)
+m.add(t)
+Error displaying widgets:model not found
+
+Followed the production instructions for Juplab ENV build here:
+https://confluence.nccs.nasa.gov/pages/viewpage.action?pageId=104824858
+
+BUT Changed the create statement to below..
+
+- For the ENV build I left out ipywidgets and let ipyleaflet resolve the ipywidgets install
+
+
+[iluser@ilab201 jupyter-lab]$ micromamba create -p /panfs/ccds02/app/modules/jupyter/ilab/jupyter-lab/ilab-juplab-let-ipyleaflet-install-ipywidgets2  -c rapidsai -c conda-forge   python=3.12.8 pip jupyterhub=5.0.0 jupyterlab=4.2.5 nb_conda_kernels nodejs pycurl notebook git   ipympl jupyter_contrib_nbextensions dask-labextension dask-jobqueue panel plotly   jupyterlab-nvdashboard jupyter_bokeh jupyterlab-git jupyterlab-github   jupyter-server-proxy pyvista ipyleaflet jupyterlab-h5web ipycanvas jupyterlab_pygments   trame trame-vuetify trame-vtk pyppeteer jupyterlab-latex vtk ipyvtklink jupyterlab-lsp   python-lsp-server jupyterlab-spreadsheet-editor jupytext nbconvert-webpdf
+conda-forge/noarch                                  20.4MB @  11.4MB/s  1.8s
+conda-forge/linux-64                                44.0MB @  15.7MB/s  2.8s
+.
+.
+
+[iluser@ilab201 jupyter-lab]$ pwd
+/panfs/ccds02/app/modules/jupyter/ilab/jupyter-lab
+
+- RELINK TO NEW ENV
+
+[iluser@ilab201 jupyter-lab]$ ln -s ilab-juplab-let-ipyleaflet-install-ipywidgets2 dev
+[iluser@ilab201 jupyter-lab]$ l
+total 240
+lrwxrwxrwx  1 iluser ilab   46 May 16 16:16 dev -> ilab-juplab-let-ipyleaflet-install-ipywidgets2
+drwxr-sr-x 20 iluser ilab 4096 Apr  9 11:18 ilab-juplab-env
+drwxr-sr-x 20 iluser ilab 4096 Apr 11 12:23 ilab-juplab-ipytree-bqplot-env
+drwxr-s--- 18 iluser ilab 4096 May  8 14:33 ilab-juplab-let-ipyleaflet-install-ipywidgets
+drwxr-s--- 19 iluser ilab 4096 May 16 13:54 ilab-juplab-let-ipyleaflet-install-ipywidgets2
+drwxr-sr-x 14 iluser ilab 4096 Apr 10 14:41 lab-env
+drwxrwsr-x 20 iluser ilab 4096 Feb  4 11:46 lab-env.2025.02.04
+lrwxrwxrwx  1 iluser ilab   17 Jan 27 14:30 prod -> ../lab-env-hub-5/
+
+************************
+
+
+- DEV KERNEL BUILD (NOT FORCE Installing ipywidgets, just installing ipyleaflet)
+
+
+[iluser@ilab201 dev]$ micromamba create -p /panfs/ccds02/app/modules/jupyter/ilab/dev/pytorch-dev-kernel-NOT-force-installing-ipywidgets -c rapidsai -c conda-forge -c pytorch -c nvidia -c legate rapids=25.04 python=3.12 'cuda-version>=12.0,<=12.8' pytorch torchvision torchaudio pytorch-cuda pip xarray dask matplotlib numpy pandas scikit-learn netCDF4 ipympl nodejs gdal rasterio seaborn geoviews cartopy hvplot holoviews rioxarray mkl jupyter-dash pytest omegaconf black contextily rio-cogeo localtileserver jupyter-server-proxy dask-geopandas pooch pythreejs owslib cupynumeric optuna ipykernel ipyleaflet plotnine mizani tiler hydra-core datasets webdataset rasterstats optuna dask-geopandas h5py pyarrow earthaccess huggingface_hub matplotlib-scalebar yacs timm torchgeo py-opencv earthengine-api hdf4 libgdal-hdf4 
+
+- RELINK TO NEW KERNEL
+
+[iluser@ilab201 dev]$ l
+total 656
+drwxrwsr-x   2 iluser ilab 4096 May  1 11:51 cache
+lrwxrwxrwx   1 iluser ilab   64 May 15 17:05 dev-hub-kernel -> pytorch-dev-v25-NO-ipyleaflet-leafmap-ipywidgets-ipysheet-geemap
+lrwxrwxrwx   1 iluser ilab   50 May 16 16:18 kernel -> pytorch-dev-kernel-NOT-force-installing-ipywidgets
+drwxr-s---  32 iluser ilab 8192 May 16 15:18 pytorch-dev-kernel-NOT-force-installing-ipywidgets
+drwxr-s---  32 iluser ilab 8192 Sep 13  2024 pytorch-dev-rapids-v23_10-v20
+drwxr-s---  32 iluser ilab 8192 Sep 30  2024 pytorch-dev-rapids-v23_10-v21
+drwxr-s---. 32 iluser ilab 8192 May  9  2024 pytorch-dev-rapids-v23_10-v9
+drwxr-s---  28 iluser ilab 8192 Apr 23 17:39 pytorch-dev-v22
+drwxr-s---  32 iluser ilab 8192 May  9 14:12 pytorch-dev-v25-NO-ipyleaflet-leafmap-ipywidgets-ipysheet-geemap
+drwxr-sr-x. 40 iluser ilab 8192 Mar  7  2023 tensorflow-dev
+drwxr-sr-x. 30 iluser ilab 8192 Nov 22  2023 tensorflow-dev-rapids-v23_02
+drwxr-sr-x. 29 iluser ilab 8192 Dec  6  2023 tensorflow-dev-rapids-v23_10
+drwxr-sr-x. 29 iluser ilab 8192 Jan 29  2024 tensorflow-dev-rapids-v23_10-v3
+drwxr-sr-x. 29 iluser ilab 8192 Feb  1  2024 tensorflow-dev-rapids-v23_10-v4
+drwxr-sr-x. 30 iluser ilab 8192 Nov 22  2023 tensorflow-dev-rapids-vwildcard
+[iluser@ilab201 dev]$ pwd
+/panfs/ccds02/app/modules/jupyter/ilab/dev
+
+
+- NB still says “Module not found”
+
+
+TRYing BUILD NEW DEV ENV WITHOUT ipyleaflet and install ipywidgets to get most updated ipywidgets (above when I was trying to let ipyleaflet grab and install ipywidgets it got a lesser version of ipywidgets).
+
+micromamba create -p /panfs/ccds02/app/modules/jupyter/ilab/jupyter-lab/ilab-juplab-env-NO-ipyleaflet-install-ipywidgets-directly -c rapidsai -c conda-forge python=3.12.8 pip jupyterhub=5.0.0 jupyterlab=4.2.5 nb_conda_kernels nodejs pycurl notebook git ipympl jupyter_contrib_nbextensions dask-labextension dask-jobqueue panel plotly jupyterlab-nvdashboard jupyter_bokeh jupyterlab-git jupyterlab-github jupyter-server-proxy pyvista ipywidgets plotnine mizani tiler hydra-core datasets webdataset rasterstats optuna dask-geopandas h5py pyarrow earthaccess huggingface_hub matplotlib-scalebar yacs timm torchgeo py-opencv earthengine-api hdf4 libgdal-hdf4
+
+export JL_ENV="/panfs/ccds02/app/modules/jupyter/ilab/jupyter-lab/ilab-juplab-env-NO-ipyleaflet-install-ipywidgets-directly”
+
+- Using the above DEV KERNEL
+
+- Getting this EXPECTED Error:
+
+From ipyleaflet import Map,Marker
+m=Map(center=(37.7749, -122.4194), zoom=10)
+
+Failed to load model class ‘LeafletMapModel’ from module ‘jupyter-leaflet’
+Error: No version of module Jupyter-leaflet is registered
+   At first.loadClass (http://www-proxy-dev.nccs.nasa.gov/jupyterhub-dev-prism/user/sstrong/lab/extensions/@jupyter-696ce72124c78273da.js?v=f8696ce72124c78273da:1:75366)
+
+- NOW go back and install ipyleaflet into the DEV Juplab ENV to get the Jupyter_leaflet 0.19.2 which is the bridge to the kernel ipyleaflet. 
+Looks like it didn’t try to install ipywidgets again, so that’s good.
+
+Reminding that when I had ipyleaflet to be installed in DEV Juplab env and not ipywidgets the build wanted to install and earlier version of ipywidgets which meant it would not be incompatible with the ipywidgets that was installed in the kernel.
+
+[iluser@ilab201 jupyter-lab]$ micromamba activate /panfs/ccds02/app/modules/jupyter/ilab/jupyter-lab/ilab-juplab-env-NO-ipyleaflet-install-ipywidgets-directly
+
+(/panfs/ccds02/app/modules/jupyter/ilab/jupyter-lab/ilab-juplab-env-NO-ipyleaflet-install-ipywidgets-directly) [iluser@ilab201 jupyter-lab]$ micromamba install -c conda-forge ipyleaflet
+conda-forge/noarch                                  20.4MB @  18.1MB/s  1.2s
+conda-forge/linux-64                                44.0MB @  21.3MB/s  2.1s
+
+Pinned packages:
+
+  - python=3.12
+
+
+Transaction
+
+  Prefix: /panfs/ccds02/app/modules/jupyter/ilab/jupyter-lab/ilab-juplab-env-NO-ipyleaflet-install-ipywidgets-directly
+
+  Updating specs:
+
+   - ipyleaflet
+
+
+  Package            Version  Build         Channel           Size
+────────────────────────────────────────────────────────────────────
+  Install:
+────────────────────────────────────────────────────────────────────
+
+  + branca             0.8.1  pyhd8ed1ab_0  conda-forge     Cached
+  + ipyleaflet        0.19.2  pyhd8ed1ab_1  conda-forge     Cached
+  + jupyter_leaflet   0.19.2  pyhd8ed1ab_1  conda-forge     Cached
+  + traittypes         0.2.1  pyh9f0ad1d_2  conda-forge     Cached
+
+  Summary:
+
+  Install: 4 packages
+
+  Total download: 0 B
+
+────────────────────────────────────────────────────────────────────
+
+
+Confirm changes: [Y/n] y
+
+Transaction starting
+Linking traittypes-0.2.1-pyh9f0ad1d_2
+Linking branca-0.8.1-pyhd8ed1ab_0
+Linking jupyter_leaflet-0.19.2-pyhd8ed1ab_1
+warning  libmamba [jupyter_leaflet-0.19.2-pyhd8ed1ab_1] The following files were already present in the environment:
+    - etc/jupyter/labconfig/page_config.json
+Linking ipyleaflet-0.19.2-pyhd8ed1ab_1
+
+Transaction finished
+
+- Tested simple-ipyleaflet-test.ipynb and that worked now.
+
+- Now move onto leafmap test. Install directly into kernel:
+
+It wants to install jupyterlab 4.4.2 into the kernel. 
+In the JupyterLab env it already has 4.2.5
+Will that cause problems? Going to go for it anyway.
+
+(/panfs/ccds02/app/modules/jupyter/ilab/dev/pytorch-dev-kernel-NOT-force-installing-ipywidgets) [iluser@ilab201 dev]$ micromamba install leafmap
+
+
+  Prefix: /panfs/ccds02/app/modules/jupyter/ilab/dev/pytorch-dev-kernel-NOT-force-installing-ipywidgets
+
+  Updating specs:
+
+   - leafmap
+
+
+  Package               Version  Build            Channel           Size
+──────────────────────────────────────────────────────────────────────────
+  Install:
+──────────────────────────────────────────────────────────────────────────
+
+  + anywidget            0.9.18  pyhd8ed1ab_0     conda-forge       70kB
+  + async-lru             2.0.5  pyh29332c3_0     conda-forge     Cached
+  + babel                2.17.0  pyhd8ed1ab_0     conda-forge     Cached
+  + bqplot              0.12.43  pyhd8ed1ab_1     conda-forge      864kB
+  + colour                0.1.5  pyhd8ed1ab_2     conda-forge       22kB
+  + eval-type-backport    0.2.2  pyhd8ed1ab_0     conda-forge        7kB
+  + eval_type_backport    0.2.2  pyha770c72_0     conda-forge       12kB
+  + gdown                 5.2.0  pyhd8ed1ab_1     conda-forge       22kB
+  + geojson               3.2.0  pyhd8ed1ab_0     conda-forge       19kB
+  + h5netcdf              1.6.1  pyhd8ed1ab_0     conda-forge       47kB
+  + ipyevents             2.0.2  pyh80e38bb_1     conda-forge     Cached
+  + ipyfilechooser        0.6.0  pyhd8ed1ab_0     conda-forge       13kB
+  + ipysheet              0.7.0  pyhd8ed1ab_0     conda-forge        1MB
+  + ipytree               0.2.2  pyhd8ed1ab_1     conda-forge      489kB
+  + ipyvue               1.11.2  pyhd8ed1ab_0     conda-forge        1MB
+  + ipyvuetify           1.11.0  pyhd8ed1ab_0     conda-forge        5MB
+  + json5                0.12.0  pyhd8ed1ab_0     conda-forge     Cached
+  + jupyter-lsp           2.2.5  pyhd8ed1ab_1     conda-forge     Cached
+  + jupyterlab            4.4.2  pyhd8ed1ab_0     conda-forge        9MB
+  + jupyterlab_server    2.27.3  pyhd8ed1ab_1     conda-forge     Cached
+  + leafmap              0.46.2  pyhd8ed1ab_0     conda-forge      420kB
+  + maplibre              0.3.3  pyhd8ed1ab_0     conda-forge      905kB
+  + notebook-shim         0.2.4  pyhd8ed1ab_1     conda-forge     Cached
+  + opera-utils          0.19.0  pyhd8ed1ab_0     conda-forge       55kB
+  + pmtiles               3.4.1  pyhd8ed1ab_0     conda-forge       20kB
+  + pscript               0.7.7  pyhd8ed1ab_0     conda-forge       68kB
+  + psygnal              0.13.0  pyhd8ed1ab_0     conda-forge       67kB
+  + pycrs                 1.0.2  pyhd8ed1ab_1     conda-forge       34kB
+  + pystac-client         0.8.6  pyhd8ed1ab_0     conda-forge       36kB
+  + python-box            7.3.2  py312h66e93f0_0  conda-forge      769kB
+  + python-duckdb         1.2.2  py312h2ec8cdc_0  conda-forge       24MB
+  + ruamel.yaml         0.18.10  py312h66e93f0_0  conda-forge      268kB
+  + ruamel.yaml.clib      0.2.8  py312h66e93f0_1  conda-forge      145kB
+  + whitebox              2.3.6  pyhd8ed1ab_0     conda-forge       65kB
+  + whiteboxgui           2.3.0  pyhd8ed1ab_1     conda-forge       75kB
+
+  Summary:
+
+  Install: 35 packages
+
+Confirm changes: [Y/n] y
+
+Transaction starting
+ipysheet                                             1.2MB @   1.9MB/s  0.3s
+ipyvue                                               1.3MB @   2.4MB/s  0.3s
+ipyvuetify                                           4.6MB @   9.5MB/s  0.4s
+maplibre                                           905.4kB @   8.7MB/s  0.1s
+bqplot                                             864.2kB @   6.3MB/s  0.1s
+ipytree                                            489.2kB @   4.7MB/s  0.1s
+jupyterlab                                           8.6MB @  13.7MB/s  0.6s
+leafmap                                            419.8kB @   3.1MB/s  0.1s
+python-box                                         768.9kB @   4.5MB/s  0.2s
+ruamel.yaml                                        267.6kB @   2.6MB/s  0.1s
+ruamel.yaml.clib                                   145.5kB @   2.5MB/s  0.1s
+whiteboxgui                                         75.5kB @   1.3MB/s  0.1s
+anywidget                                           69.6kB @  ??.?MB/s  0.1s
+psygnal                                             66.7kB @  ??.?MB/s  0.0s
+pscript                                             68.1kB @   1.3MB/s  0.1s
+whitebox                                            64.6kB @   1.1MB/s  0.1s
+python-duckdb                                       23.8MB @  28.0MB/s  0.8s
+opera-utils                                         55.2kB @ 703.0kB/s  0.1s
+h5netcdf                                            47.1kB @  ??.?MB/s  0.0s
+pycrs                                               33.9kB @ 667.9kB/s  0.1s
+pystac-client                                       35.8kB @ 633.6kB/s  0.1s
+gdown                                               21.9kB @  ??.?MB/s  0.0s
+pmtiles                                             19.9kB @  ??.?MB/s  0.0s
+colour                                              21.8kB @  ??.?MB/s  0.1s
+ipyfilechooser                                      13.3kB @ 213.6kB/s  0.1s
+eval_type_backport                                  11.5kB @ 183.8kB/s  0.1s
+eval-type-backport                                   6.7kB @ 118.2kB/s  0.1s
+geojson                                             19.0kB @ 204.9kB/s  0.1s
+Linking python-duckdb-1.2.2-py312h2ec8cdc_0
+Linking ruamel.yaml.clib-0.2.8-py312h66e93f0_1
+Linking ruamel.yaml-0.18.10-py312h66e93f0_0
+Linking python-box-7.3.2-py312h66e93f0_0
+Linking bqplot-0.12.43-pyhd8ed1ab_1
+Linking geojson-3.2.0-pyhd8ed1ab_0
+Linking h5netcdf-1.6.1-pyhd8ed1ab_0
+Linking colour-0.1.5-pyhd8ed1ab_2
+Linking gdown-5.2.0-pyhd8ed1ab_1
+Linking opera-utils-0.19.0-pyhd8ed1ab_0
+Linking pmtiles-3.4.1-pyhd8ed1ab_0
+Linking pycrs-1.0.2-pyhd8ed1ab_1
+Linking pystac-client-0.8.6-pyhd8ed1ab_0
+Linking ipyfilechooser-0.6.0-pyhd8ed1ab_0
+Linking async-lru-2.0.5-pyh29332c3_0
+Linking jupyter-lsp-2.2.5-pyhd8ed1ab_1
+Linking notebook-shim-0.2.4-pyhd8ed1ab_1
+Linking ipyvue-1.11.2-pyhd8ed1ab_0
+Linking pscript-0.7.7-pyhd8ed1ab_0
+Linking psygnal-0.13.0-pyhd8ed1ab_0
+Linking ipytree-0.2.2-pyhd8ed1ab_1
+Linking whitebox-2.3.6-pyhd8ed1ab_0
+Linking eval_type_backport-0.2.2-pyha770c72_0
+Linking babel-2.17.0-pyhd8ed1ab_0
+Linking json5-0.12.0-pyhd8ed1ab_0
+Linking ipyevents-2.0.2-pyh80e38bb_1
+Linking ipyvuetify-1.11.0-pyhd8ed1ab_0
+Linking ipysheet-0.7.0-pyhd8ed1ab_0
+Linking anywidget-0.9.18-pyhd8ed1ab_0
+Linking whiteboxgui-2.3.0-pyhd8ed1ab_1
+Linking eval-type-backport-0.2.2-pyhd8ed1ab_0
+Linking jupyterlab_server-2.27.3-pyhd8ed1ab_1
+Linking maplibre-0.3.3-pyhd8ed1ab_0
+Linking jupyterlab-4.4.2-pyhd8ed1ab_0
+Linking leafmap-0.46.2-pyhd8ed1ab_0
+
+Transaction finished
+
+GO TO THE ENV AND INSTALL LOCALTILESERVER THERE
+
+(/panfs/ccds02/app/modules/jupyter/ilab/jupyter-lab/ilab-juplab-env-NO-ipyleaflet-install-ipywidgets-directly) [iluser@ilab201 jupyter-lab]$ micromamba install localtileserver
+conda-forge/noarch                                  20.5MB @  22.2MB/s  0.9s
+conda-forge/linux-64                                44.1MB @  31.1MB/s  1.4s
+
+Pinned packages:
+
+  - python=3.12
+
+
+Transaction
+
+  Prefix: /panfs/ccds02/app/modules/jupyter/ilab/jupyter-lab/ilab-juplab-env-NO-ipyleaflet-install-ipywidgets-directly
+
+  Updating specs:
+
+   - localtileserver
+
+
+  Package             Version  Build                Channel           Size
+────────────────────────────────────────────────────────────────────────────
+  Install:
+────────────────────────────────────────────────────────────────────────────
+
+  + aniso8601          10.0.0  pyhd8ed1ab_0         conda-forge     Cached
+  + cachelib           0.13.0  pyhd8ed1ab_1         conda-forge     Cached
+  + color-operations    0.2.0  py312hc0a28a1_0      conda-forge     Cached
+  + flask               3.1.1  pyhd8ed1ab_0         conda-forge     Cached
+  + flask-caching       2.3.1  pyhd8ed1ab_0         conda-forge     Cached
+  + flask-cors          6.0.0  pyhe01879c_0         conda-forge       17kB
+  + flask-restx         1.3.0  pyhd8ed1ab_1         conda-forge     Cached
+  + itsdangerous        2.2.0  pyhd8ed1ab_1         conda-forge     Cached
+  + localtileserver    0.10.6  pyhd8ed1ab_0         conda-forge     Cached
+  + morecantile         6.2.0  pyhd8ed1ab_0         conda-forge     Cached
+  + numexpr            2.10.2  mkl_py312hacae085_0  conda-forge     Cached
+  + pystac             1.13.0  pyhd8ed1ab_0         conda-forge     Cached
+  + rio-cogeo           5.4.1  pyhd8ed1ab_0         conda-forge     Cached
+  + rio-tiler           7.7.2  pyhd8ed1ab_0         conda-forge     Cached
+  + server-thread       0.3.0  pyhd8ed1ab_0         conda-forge     Cached
+  + uvicorn            0.34.2  pyh31011fe_0         conda-forge     Cached
+  + werkzeug            3.1.3  pyhd8ed1ab_1         conda-forge     Cached
+
+  Summary:
+
+  Install: 17 packages
+
+  Total download: 17kB
+
+IN NB GETTING PROJ ERROR
+
+from localtileserver import TileClient, get_leaflet_tile_layer, examples
+.
+.
+CRSError: The EPSG code is unknown. PROJ: proj_create_from_database: /panfs/ccds02/app/modules/jupyter/ilab/jupyter-lab/ilab-juplab-env/share/proj/proj.db contains DATABASE.LAYOUT.VERSION.MINOR = 4 whereas a number >= 5 is expected. It comes from another PROJ installation.
+
+UNINSTALL localtileserver FROM Juplab ENV
+
+Still getting error
+
+from localtileserver import TileClient, get_leaflet_tile_layer, examples
+.
+.
+CRSError: The EPSG code is unknown. PROJ: proj_create_from_database: /panfs/ccds02/app/modules/jupyter/ilab/jupyter-lab/ilab-juplab-env/share/proj/proj.db contains DATABASE.LAYOUT.VERSION.MINOR = 4 whereas a number >= 5 is expected. It comes from another PROJ installation.
+
+
+TIME TO COMPARE PROD ENV AND PROD KERNEL
+
+Brought up PROD Juphub and prod kernel
+
+This is where proj env vars is Ponting to when I do %env in my NB :
+'PROJ_DATA': '/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel/share/proj',
+ 'PROJ_LIB': '/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel/share/proj',
+
+
+TRY PROD Juphub and DEV kernel. Does not get the CRS error.
+
+AHA.. there should not even be a proj directory down the ENV directory path. PROD DOES NOT have one.
+
+(/panfs/ccds02/app/modules/jupyter/ilab/lab-env-hub-5) [sstrong@gpu003 share]$ pwd
+/panfs/ccds02/app/modules/jupyter/ilab/jupyter-lab/prod/share
+
+DID I accidentally install proj dir when I thought I needed to put localtileserver in the ENV. I did try to uninstall it from the ENV but it left the proj dir behind.
+
+GOING BACK TO MY DEV JUPLAB ENV:
+
+%env PROJ_LIB=/panfs/ccds02/app/modules/jupyter/ilab/dev/kernel/share/proj
+%env PROJ_DATA=/panfs/ccds02/app/modules/jupyter/ilab/dev/kernel/share/proj
+
+
+SOLVES THE LOCALTILESERVER CRS ERROR!!
+
+I can also run the localtileserver-banesullivan.ipynb. but I have to set the PROJ_DATA to what the PROJ_LIB is (defaults to the juplab env path)
+
+INTERESTING REFERENCE POINT.. when I run localtilserver-banesullivan.ipynb using the new DEV JupLAB env combined with prod ILAB Kernel (PyTorch)
+
+I get error doing this cell:
+
+m.add(t)
+
+[Open Browser Console for more detailed log - Double click to close this message]
+Failed to load model class 'LeafletMapModel' from module 'jupyter-leaflet'
+Error: Module jupyter-leaflet, version ^0.17 is not registered, however,         0.19.2 is
+    at f.loadClass (https://www-proxy-dev.nccs.nasa.gov/jupyterhub-dev-prism/user/sstrong/lab/extensions/@jupyter-widgets/jupyterlab-manager/static/446.f8696ce72124c78273da.js?v=f8696ce72124c78273da:1:75487)
+    at f.loadModelClass (https://www-proxy-dev.nccs.nasa.gov/jupyterhub-dev-prism/user/sstrong/lab/extensions/@jupyter-widgets/jupyterlab-manager/static/327.d242f1a99504b2d5b629.js?v=d242f1a99504b2d5b629:1:10580)
+    at f._make_model (https://www-proxy-dev.nccs.nasa.gov/jupyterhub-dev-prism/user/sstrong/lab/extensions/@jupyter-widgets/jupyterlab-manager/static/327.d242f1a99504b2d5b629.js?v=d242f1a99504b2d5b629:1:7368)
+    at f.new_model (https://www-proxy-dev.nccs.nasa.gov/jupyterhub-dev-prism/user/sstrong/lab/extensions/@jupyter-widgets/jupyterlab-manager/static/327.d242f1a99504b2d5b629.js?v=d242f1a99504b2d5b629:1:5137)
+    at f.handle_comm_open (https://www-proxy-dev.nccs.nasa.gov/jupyterhub-dev-prism/user/sstrong/lab/extensions/@jupyter-widgets/jupyterlab-manager/static/327.d242f1a99504b2d5b629.js?v=d242f1a99504b2d5b629:1:3894)
+    at _handleCommOpen (https://www-proxy-dev.nccs.nasa.gov/jupyterhub-dev-prism/user/sstrong/lab/extensions/@jupyter-widgets/jupyterlab-manager/static/446.f8696ce72124c78273da.js?v=f8696ce72124c78273da:1:73903)
+    at C._handleCommOpen (https://www-proxy-dev.nccs.nasa.gov/jupyterhub-dev-prism/user/sstrong/static/lab/jlab_core.8f3994dff54f557f7fe9.js?v=8f3994dff54f557f7fe9:1:1372274)
+    at async C._handleMessage (https://www-proxy-dev.nccs.nasa.gov/jupyterhub-dev-prism/user/sstrong/static/lab/jlab_core.8f3994dff54f557f7fe9.js?v=8f3994dff54f557f7fe9:1:1374264)
+
+So that tells me that the updated Jupyter-leaflet version needs to be 0.19 which is what is in the new DEV Kernel.
+
+
+
+*********************
+
+GETTING ERROR WITH THE CUDA-compiled-version-test-DEV-kernel-error.ipynb 
+
+import torch
+print(torch.cuda.current_device())
+
+---------------------------------------------------------------------------
+AssertionError                            Traceback (most recent call last)
+Cell In[2], line 1
+----> 1 print(torch.cuda.current_device())
+
+File /panfs/ccds02/app/modules/jupyter/ilab/dev/kernel/lib/python3.12/site-packages/torch/cuda/__init__.py:940, in current_device()
+    938 def current_device() -> int:
+    939     r"""Return the index of a currently selected device."""
+--> 940     _lazy_init()
+    941     return torch._C._cuda_getDevice()
+
+File /panfs/ccds02/app/modules/jupyter/ilab/dev/kernel/lib/python3.12/site-packages/torch/cuda/__init__.py:310, in _lazy_init()
+    305     raise RuntimeError(
+    306         "Cannot re-initialize CUDA in forked subprocess. To use CUDA with "
+    307         "multiprocessing, you must use the 'spawn' start method"
+    308     )
+    309 if not hasattr(torch._C, "_cuda_getDeviceCount"):
+--> 310     raise AssertionError("Torch not compiled with CUDA enabled")
+    311 if _cudart is None:
+    312     raise AssertionError(
+    313         "libcudart functions unavailable. It looks like you have a broken build?"
+    314     )
+
+AssertionError: Torch not compiled with CUDA enabled
+
+
+FIXED this with the undesirable uninstall and reinstall of torch vision ..
+
+BEFORE UNINSTALL AND REINSTALL
+
+(/panfs/ccds02/app/modules/jupyter/ilab/dev/pytorch-dev-kernel-NOT-force-installing-ipywidgets) [sstrong@ilab201 dev]$ mm list |grep torch
+List of packages in environment: "/panfs/ccds02/app/modules/jupyter/ilab/dev/pytorch-dev-kernel-NOT-force-installing-ipywidgets"
+  efficientnet-pytorch                  0.7.1           pyhd8ed1ab_1                      conda-forge
+  libopenvino-pytorch-frontend          2024.6.0        h5888daf_3                        conda-forge
+  libtorch                              2.5.1           cpu_mkl_hc5f969b_115              conda-forge
+  pytorch                               2.5.1           cpu_mkl_py312_haf1be90_115        conda-forge
+  pytorch-cuda                          12.4            hc786d27_7                        pytorch    
+  pytorch-lightning                     2.5.1.post0     pyh2a12c56_0                      conda-forge
+  segmentation-models-pytorch           0.5.0           pyh2a12c56_0                      conda-forge
+  torchaudio                            2.5.1           cpu_py312h6db6e6d_0               conda-forge
+  torchgeo                              0.7.0           pyhd8ed1ab_0                      conda-forge
+  torchmetrics                          1.7.1           pyhd8ed1ab_0                      conda-forge
+  torchvision                           0.20.1          cpu_py312_hea98c79_6              conda-forge
+
+
+
+(/panfs/ccds02/app/modules/jupyter/ilab/dev/pytorch-dev-kernel-NOT-force-installing-ipywidgets) [iluser@ilab201 dev]$ micromamba remove torchvision
+Transaction
+
+  Prefix: /panfs/ccds02/app/modules/jupyter/ilab/dev/pytorch-dev-kernel-NOT-force-installing-ipywidgets
+
+  Removing specs:
+
+   - torchvision
+
+
+  Package                            Version  Build                 Channel           Size
+────────────────────────────────────────────────────────────────────────────────────────────
+  Remove:
+────────────────────────────────────────────────────────────────────────────────────────────
+
+  - adwaita-icon-theme                  48.0  unix_0                conda-forge     Cached
+  - aenum                             3.1.15  pyhd8ed1ab_1          conda-forge     Cached
+  - argcomplete                        3.6.2  pyhd8ed1ab_0          conda-forge     Cached
+  - at-spi2-atk                       2.38.0  h0630a04_3            conda-forge     Cached
+  - at-spi2-core                      2.40.3  h0630a04_0            conda-forge     Cached
+  - atk-1.0                           2.38.0  h04ea711_2            conda-forge     Cached
+  - dataclasses                          0.8  pyhc8e2a94_3          conda-forge     Cached
+  - docstring_parser                    0.16  pyhd8ed1ab_0          conda-forge     Cached
+  - efficientnet-pytorch               0.7.1  pyhd8ed1ab_1          conda-forge     Cached
+  - einops                             0.8.1  pyhd8ed1ab_0          conda-forge     Cached
+  - epoxy                             1.5.10  h166bdaf_1            conda-forge     Cached
+  - gtk3                             3.24.43  h021d004_4            conda-forge     Cached
+  - hicolor-icon-theme                  0.17  ha770c72_2            conda-forge     Cached
+  - jsonargparse                      4.40.0  pyhd8ed1ab_0          conda-forge     Cached
+  - jsonnet                           0.21.0  py312he346f12_0       conda-forge     Cached
+  - kornia                             0.8.1  pyhd8ed1ab_0          conda-forge     Cached
+  - kornia-rs                          0.1.9  py312he9d9d3d_0       conda-forge     Cached
+  - libde265                          1.0.15  h00ab1b0_0            conda-forge     Cached
+  - libheif                           1.19.6  gpl_hc18d805_100      conda-forge     Cached
+  - libspatialindex                    2.1.0  he57a185_0            conda-forge     Cached
+  - lightly                           1.5.20  pyhd8ed1ab_0          conda-forge     Cached
+  - lightly-utils                      0.0.2  pyhd8ed1ab_1          conda-forge     Cached
+  - lightning                    2.5.1.post0  pyhd8ed1ab_0          conda-forge     Cached
+  - lightning-utilities               0.14.3  pyhd8ed1ab_0          conda-forge     Cached
+  - munch                              4.0.0  pyhd8ed1ab_1          conda-forge     Cached
+  - pretrainedmodels                   0.7.4  pyhd8ed1ab_2          conda-forge     Cached
+  - pytorch-lightning            2.5.1.post0  pyh2a12c56_0          conda-forge     Cached
+  - rtree                              1.4.0  pyh11ca60a_1          conda-forge     Cached
+  - safetensors                        0.5.3  py312h12e396e_0       conda-forge     Cached
+  - segmentation-models-pytorch        0.5.0  pyh2a12c56_0          conda-forge     Cached
+  - timm                              1.0.15  pyhd8ed1ab_0          conda-forge     Cached
+  - torchgeo                           0.7.0  pyhd8ed1ab_0          conda-forge     Cached
+  - torchmetrics                       1.7.1  pyhd8ed1ab_0          conda-forge     Cached
+  - torchvision                       0.20.1  cpu_py312_hea98c79_6  conda-forge     Cached
+  - typeshed-client                    2.4.0  pyhd8ed1ab_1          conda-forge     Cached
+  - validators                        0.35.0  pyhd8ed1ab_0          conda-forge     Cached
+  - xorg-libxinerama                   1.1.5  h5888daf_1            conda-forge     Cached
+  - xorg-libxrandr                     1.5.4  hb9d3cd8_0            conda-forge     Cached
+  - xorg-libxtst                       1.2.5  hb9d3cd8_3            conda-forge     Cached
+
+  Summary:
+
+  Remove: 39 packages
+
+  Total download: 0 B
+
+────────────────────────────────────────────────────────────────────────────────────────────
+
+
+Confirm changes: [Y/n] y
+
+Transaction starting
+Unlinking torchgeo-0.7.0-pyhd8ed1ab_0
+Unlinking typeshed-client-2.4.0-pyhd8ed1ab_1
+Unlinking segmentation-models-pytorch-0.5.0-pyh2a12c56_0
+Unlinking rtree-1.4.0-pyh11ca60a_1
+Unlinking lightning-2.5.1.post0-pyhd8ed1ab_0
+Unlinking lightly-1.5.20-pyhd8ed1ab_0
+Unlinking kornia-0.8.1-pyhd8ed1ab_0
+Unlinking jsonargparse-4.40.0-pyhd8ed1ab_0
+Unlinking einops-0.8.1-pyhd8ed1ab_0
+Unlinking timm-1.0.15-pyhd8ed1ab_0
+Unlinking pretrainedmodels-0.7.4-pyhd8ed1ab_2
+Unlinking efficientnet-pytorch-0.7.1-pyhd8ed1ab_1
+Unlinking libspatialindex-2.1.0-he57a185_0
+Unlinking pytorch-lightning-2.5.1.post0-pyh2a12c56_0
+Unlinking lightly-utils-0.0.2-pyhd8ed1ab_1
+Unlinking aenum-3.1.15-pyhd8ed1ab_1
+Unlinking kornia-rs-0.1.9-py312he9d9d3d_0
+Unlinking validators-0.35.0-pyhd8ed1ab_0
+Unlinking jsonnet-0.21.0-py312he346f12_0
+Unlinking docstring_parser-0.16-pyhd8ed1ab_0
+Unlinking dataclasses-0.8-pyhc8e2a94_3
+Unlinking argcomplete-3.6.2-pyhd8ed1ab_0
+Unlinking safetensors-0.5.3-py312h12e396e_0
+Unlinking munch-4.0.0-pyhd8ed1ab_1
+Unlinking torchvision-0.20.1-cpu_py312_hea98c79_6
+Unlinking torchmetrics-1.7.1-pyhd8ed1ab_0
+Unlinking gtk3-3.24.43-h021d004_4
+Unlinking adwaita-icon-theme-48.0-unix_0
+Unlinking libheif-1.19.6-gpl_hc18d805_100
+Unlinking lightning-utilities-0.14.3-pyhd8ed1ab_0
+Unlinking xorg-libxrandr-1.5.4-hb9d3cd8_0
+Unlinking xorg-libxinerama-1.1.5-h5888daf_1
+Unlinking epoxy-1.5.10-h166bdaf_1
+Unlinking at-spi2-atk-2.38.0-h0630a04_3
+Unlinking hicolor-icon-theme-0.17-ha770c72_2
+Unlinking libde265-1.0.15-h00ab1b0_0
+Unlinking atk-1.0-2.38.0-h04ea711_2
+Unlinking at-spi2-core-2.40.3-h0630a04_0
+Unlinking xorg-libxtst-1.2.5-hb9d3cd8_3
+
+Transaction finished
+
+(/panfs/ccds02/app/modules/jupyter/ilab/dev/pytorch-dev-kernel-NOT-force-installing-ipywidgets) [iluser@ilab201 dev]$ micromamba install pytorch::torchvision
+conda-forge/noarch                                  20.6MB @  23.8MB/s  1.0s
+conda-forge/linux-64                                44.2MB @  31.4MB/s  1.5s
+
+Pinned packages:
+
+  - python=3.12
+
+
+Transaction
+
+  Prefix: /panfs/ccds02/app/modules/jupyter/ilab/dev/pytorch-dev-kernel-NOT-force-installing-ipywidgets
+
+  Updating specs:
+
+   - pytorch::torchvision
+
+
+  Package           Version  Build                         Channel           Size
+───────────────────────────────────────────────────────────────────────────────────
+  Install:
+───────────────────────────────────────────────────────────────────────────────────
+
+  + blas                1.0  mkl                           conda-forge        1kB
+  + pytorch-mutex       1.0  cuda                          pytorch            3kB
+  + torchtriton       3.0.0  py312                         pytorch          245MB
+  + torchvision      0.19.0  py312_cu124                   pytorch            9MB
+
+  Remove:
+───────────────────────────────────────────────────────────────────────────────────
+
+  - libtorch          2.5.1  cpu_mkl_hc5f969b_115          conda-forge     Cached
+
+  Change:
+───────────────────────────────────────────────────────────────────────────────────
+
+  - libblas           3.9.0  31_hfdb39a5_mkl               conda-forge     Cached
+  + libblas           3.9.0  16_linux64_mkl                conda-forge       13kB
+  - libcblas          3.9.0  31_h372d94f_mkl               conda-forge     Cached
+  + libcblas          3.9.0  16_linux64_mkl                conda-forge       13kB
+  - liblapack         3.9.0  31_hc41d3b0_mkl               conda-forge     Cached
+  + liblapack         3.9.0  16_linux64_mkl                conda-forge       13kB
+  - liblapacke        3.9.0  31_hbc6e62b_mkl               conda-forge     Cached
+  + liblapacke        3.9.0  16_linux64_mkl                conda-forge       13kB
+
+  Downgrade:
+───────────────────────────────────────────────────────────────────────────────────
+
+  - libopenblas      0.3.29  openmp_hd680484_0             conda-forge     Cached
+  + libopenblas      0.3.21  openmp_h74cd887_3             conda-forge       11MB
+  - llvm-openmp      20.1.5  h024ca30_0                    conda-forge     Cached
+  + llvm-openmp      15.0.7  h0cdce71_0                    conda-forge        3MB
+  - mkl            2024.2.2  ha957f24_16                   conda-forge     Cached
+  + mkl            2022.2.1  h84fe81f_16997                conda-forge      165MB
+  - numexpr          2.10.2  mkl_py312hacae085_0           conda-forge     Cached
+  + numexpr           2.8.7  mkl_py312hfc5f503_4           conda-forge      156kB
+  - openblas         0.3.29  openmp_hd77311e_0             conda-forge     Cached
+  + openblas         0.3.21  openmp_h53a8fd6_3             conda-forge       11MB
+  - pytorch           2.5.1  cpu_mkl_py312_haf1be90_115    conda-forge     Cached
+  + pytorch           2.4.0  py3.12_cuda12.4_cudnn9.1.0_0  pytorch            1GB
+  - torchaudio        2.5.1  cpu_py312h6db6e6d_0           conda-forge     Cached
+  + torchaudio        2.4.0  py312_cu124                   pytorch            7MB
+
+  Summary:
+
+  Install: 4 packages
+  Remove: 1 packages
+  Change: 4 packages
+  Downgrade: 7 packages
+
+  Total download: 2GB
+
+───────────────────────────────────────────────────────────────────────────────────
+
+
+Confirm changes: [Y/n] y
+
+Transaction starting
+libopenblas                                         10.6MB @  18.7MB/s  0.5s
+openblas                                            11.4MB @  20.9MB/s  0.5s
+torchaudio                                           6.7MB @  27.2MB/s  0.2s
+torchvision                                          8.8MB @  24.9MB/s  0.4s
+numexpr                                            156.4kB @   1.5MB/s  0.1s
+llvm-openmp                                          3.3MB @   9.7MB/s  0.3s
+libblas                                             13.1kB @  ??.?MB/s  0.1s
+liblapacke                                          12.8kB @  ??.?MB/s  0.0s
+libcblas                                            12.8kB @ 234.5kB/s  0.1s
+liblapack                                           12.8kB @  ??.?MB/s  0.0s
+pytorch-mutex                                        2.9kB @  ??.?MB/s  0.0s
+blas                                                 1.4kB @  ??.?MB/s  0.1s
+mkl                                                164.9MB @  46.4MB/s  3.6s
+torchtriton                                        244.9MB @  50.2MB/s  4.9s
+pytorch                                              1.4GB @ 111.8MB/s 12.9s
+Unlinking libtorch-2.5.1-cpu_mkl_hc5f969b_115
+Unlinking llvm-openmp-20.1.5-h024ca30_0
+Unlinking mkl-2024.2.2-ha957f24_16
+Unlinking libblas-3.9.0-31_hfdb39a5_mkl
+Unlinking libcblas-3.9.0-31_h372d94f_mkl
+Unlinking numexpr-2.10.2-mkl_py312hacae085_0
+Unlinking libopenblas-0.3.29-openmp_hd680484_0
+Unlinking liblapack-3.9.0-31_hc41d3b0_mkl
+Unlinking openblas-0.3.29-openmp_hd77311e_0
+Unlinking liblapacke-3.9.0-31_hbc6e62b_mkl
+Unlinking pytorch-2.5.1-cpu_mkl_py312_haf1be90_115
+Unlinking torchaudio-2.5.1-cpu_py312h6db6e6d_0
+Linking pytorch-mutex-1.0-cuda
+Linking llvm-openmp-15.0.7-h0cdce71_0
+Linking mkl-2022.2.1-h84fe81f_16997
+Linking libblas-3.9.0-16_linux64_mkl
+Linking libcblas-3.9.0-16_linux64_mkl
+Linking numexpr-2.8.7-mkl_py312hfc5f503_4
+Linking libopenblas-0.3.21-openmp_h74cd887_3
+Linking liblapack-3.9.0-16_linux64_mkl
+Linking blas-1.0-mkl
+Linking openblas-0.3.21-openmp_h53a8fd6_3
+Linking liblapacke-3.9.0-16_linux64_mkl
+Linking pytorch-2.4.0-py3.12_cuda12.4_cudnn9.1.0_0
+Linking torchtriton-3.0.0-py312
+Linking torchaudio-2.4.0-py312_cu124
+Linking torchvision-0.19.0-py312_cu124
+
+Transaction finished
+
+(/panfs/ccds02/app/modules/jupyter/ilab/dev/pytorch-dev-kernel-NOT-force-installing-ipywidgets) [iluser@ilab201 dev]$ 
+
+(/panfs/ccds02/app/modules/jupyter/ilab/dev/pytorch-dev-kernel-NOT-force-installing-ipywidgets) [iluser@ilab201 dev]$ micromamba list |grep torch
+List of packages in environment: "/panfs/ccds02/app/modules/jupyter/ilab/dev/pytorch-dev-kernel-NOT-force-installing-ipywidgets"
+  libopenvino-pytorch-frontend          2024.6.0        h5888daf_3                        conda-forge
+  pytorch                               2.4.0           py3.12_cuda12.4_cudnn9.1.0_0      pytorch    
+  pytorch-cuda                          12.4            hc786d27_7                        pytorch    
+  pytorch-mutex                         1.0             cuda                              pytorch    
+  torchaudio                            2.4.0           py312_cu124                       pytorch    
+  torchtriton                           3.0.0           py312                             pytorch    
+  torchvision                           0.19.0          py312_cu124                       pytorch    
+
+
+CONVEYED to Jordan that the new DEV ENV and DEV Ker are ready for him to test his NBs.
+
+Meanwhile..
+
+I had modis-vcf already pulled from git so decided to test the NB..
+
+One of the imports needed SHAP so HAD to Install “SHAP” - RAN the modis-vcf NB and looks good to me.
+
+(/panfs/ccds02/app/modules/jupyter/ilab/dev/pytorch-dev-kernel-NOT-force-installing-ipywidgets) [iluser@ilab201 dev]$ micromamba install -c conda-forge shap
+conda-forge/noarch                                  20.7MB @  28.6MB/s  0.7s
+conda-forge/linux-64                                44.3MB @  36.2MB/s  1.2s
+
+Pinned packages:
+
+  - python=3.12
+
+
+Transaction
+
+  Prefix: /panfs/ccds02/app/modules/jupyter/ilab/dev/pytorch-dev-kernel-NOT-force-installing-ipywidgets
+
+  Updating specs:
+
+   - shap
+
+
+  Package   Version  Build                Channel         Size
+────────────────────────────────────────────────────────────────
+  Install:
+────────────────────────────────────────────────────────────────
+
+  + shap     0.47.2  cpu_py312he67637a_0  conda-forge      3MB
+  + slicer    0.0.8  pyhd8ed1ab_0         conda-forge     20kB
+
+  Summary:
+
+  Install: 2 packages
+
+  Total download: 3MB
+
+────────────────────────────────────────────────────────────────
+
+
+Confirm changes: [Y/n] y
+
+Transaction starting
+shap                                                 2.9MB @ 240.5kB/s  0.1s
+slicer                                              20.0kB @  93.7kB/s  0.1s
+Linking slicer-0.0.8-pyhd8ed1ab_0
+Linking shap-0.47.2-cpu_py312he67637a_0
+
+Transaction finished
+
+(/panfs/ccds02/app/modules/jupyter/ilab/dev/pytorch-dev-kernel-NOT-force-installing-ipywidgets) [iluser@ilab201 dev]$ micromamba list |grep shap
+  shap                                  0.47.2          cpu_py312he67637a_0               conda-forge
+  shapely                               2.0.7           py312h21f5128_1                   conda-forge
+
+
+
+NOW I am grabbing any NB I can out of our repos and testing with the DEV Env and DEV kernel 
+
+Under ilab_testing/pytorch-caney
+
+satvision_toa_modis_reconstruction_example_notebook.ipynb
+
+sys.path.append('../../pytorch-caney')
+
+from pytorch_caney.models.mim import build_mim_model
+from pytorch_caney.transforms.mim_modis_toa import MimTransform
+from pytorch_caney.configs.config import _C, _update_config_from_file
+from pytorch_caney.plotting.modis_toa import plot_export_pdf
+
+---------------------------------------------------------------------------
+ModuleNotFoundError                       Traceback (most recent call last)
+Cell In[3], line 3
+      1 sys.path.append('../../pytorch-caney')
+----> 3 from pytorch_caney.models.mim import build_mim_model
+      4 from pytorch_caney.transforms.mim_modis_toa import MimTransform
+      5 from pytorch_caney.configs.config import _C, _update_config_from_file
+
+File /panfs/ccds02/nobackup/projects/ilab/ilab_testing/pytorch-caney/notebooks/../../pytorch-caney/pytorch_caney/models/__init__.py:2
+      1 from .model_factory import ModelFactory
+----> 2 from .mim import MiMModel
+      3 from .heads import SegmentationHead
+      4 from .decoders import FcnDecoder
+
+File /panfs/ccds02/nobackup/projects/ilab/ilab_testing/pytorch-caney/notebooks/../../pytorch-caney/pytorch_caney/models/mim.py:4
+      2 import torch.nn as nn
+      3 import torch.nn.functional as F
+----> 4 from timm.models.layers import trunc_normal_
+      6 from .encoders.swinv2 import SwinTransformerV2
+      9 # -----------------------------------------------------------------------------
+     10 # SwinTransformerV2ForMiM
+     11 # -----------------------------------------------------------------------------
+
+ModuleNotFoundError: No module named 'timm'
+
+
+Apparently when I removed torchvision it also REMOVED “timm” 
+but when I reinstalled torchvision it didn’t reinstall “timm”. !!!!!!
+
+So NOW I REINSTALLED “timm” manually.
+
+[iluser@ilab201 dev]$ micromamba activate ./pytorch-dev-kernel-NOT-force-installing-ipywidgets
+(/panfs/ccds02/app/modules/jupyter/ilab/dev/pytorch-dev-kernel-NOT-force-installing-ipywidgets) [iluser@ilab201 dev]$ micromamba install conda-forge::timm
+conda-forge/noarch                                  20.7MB @  24.4MB/s  0.9s
+conda-forge/linux-64                                44.3MB @  31.0MB/s  1.4s
+
+Pinned packages:
+
+  - python=3.12
+
+
+Transaction
+
+  Prefix: /panfs/ccds02/app/modules/jupyter/ilab/dev/pytorch-dev-kernel-NOT-force-installing-ipywidgets
+
+  Updating specs:
+
+   - conda-forge::timm
+
+
+  Package        Version  Build            Channel           Size
+───────────────────────────────────────────────────────────────────
+  Install:
+───────────────────────────────────────────────────────────────────
+
+  + safetensors    0.5.3  py312h12e396e_0  conda-forge     Cached
+  + timm          1.0.15  pyhd8ed1ab_0     conda-forge     Cached
+
+  Summary:
+
+  Install: 2 packages
+
+  Total download: 0 B
+
+───────────────────────────────────────────────────────────────────
+
+
+Confirm changes: [Y/n] y
+
+Transaction starting
+Linking safetensors-0.5.3-py312h12e396e_0
+Linking timm-1.0.15-pyhd8ed1ab_0
+
+Transaction finished
+
+GOT past that error now. Just getting error on cell 5 about CONFIG_PATH but not going to persue.
+
+6/16/25
+
+INSTALLED “transformers” into the DEV kernel. 
+From Mel:  I just restarted my server for JH and ran into a couple of weird things - 1) the Dev kernel doesn't have the transformers package anymore and I get a permission error when i try to pip install, and 2) I get an error: 
+"Failed to load the jupyterlab-git server extension
+git command not found - please ensure you have Git > 2 installed"
+when I start the server.
+From Me: Mel, I don't see a package named "transformers" in either the previous version or newest version of the DEV kernel. I also don't see it in the production ILab kernel (pytorch).  The kernel builds up to this point have not included that package. Is this something that should be installed?
+
+From Glenn: For what it's worth, I'm using HF/transformers in QEFM for Aurora and Privthi.  However, I'm not sure that this should drive any decisions regarding the Dev/Prod kernels.
+
+(/panfs/ccds02/app/modules/jupyter/ilab/dev/pytorch-dev-kernel-NOT-force-installing-ipywidgets) [iluser@ilab201 dev]$ micromamba install conda-forge::transformers
+conda-forge/noarch                                  20.8MB @  24.7MB/s  0.8s
+conda-forge/linux-64                                44.6MB @  29.5MB/s  1.4s
+
+Pinned packages:
+
+  - python=3.12
+
+
+Transaction
+
+  Prefix: /panfs/ccds02/app/modules/jupyter/ilab/dev/pytorch-dev-kernel-NOT-force-installing-ipywidgets
+
+  Updating specs:
+
+   - conda-forge::transformers
+
+
+  Package           Version  Build            Channel          Size
+─────────────────────────────────────────────────────────────────────
+  Install:
+─────────────────────────────────────────────────────────────────────
+
+  + regex         2024.11.6  py312h66e93f0_0  conda-forge     403kB
+  + tokenizers       0.21.1  py312h8360d73_0  conda-forge       2MB
+  + transformers     4.52.4  pyhd8ed1ab_0     conda-forge       4MB
+
+  Summary:
+
+  Install: 3 packages
+
+  Total download: 6MB
+
+Transaction starting
+transformers                                         3.7MB @   9.8MB/s  0.1s
+tokenizers                                           2.3MB @ 773.8kB/s  0.1s
+regex                                              402.8kB @ 312.6kB/s  0.1s
+Linking regex-2024.11.6-py312h66e93f0_0
+Linking tokenizers-0.21.1-py312h8360d73_0
+Linking transformers-4.52.4-pyhd8ed1ab_0
+
+Transaction finished
+
+8/1/25
+********************************
+JORDAN asked for 
+PyTorch-lightning
+Lightning 
+Torch metrics
+Transformers
+flash_attn - note that latest version of this throws error so did “pip install flash-atto-2.7.3
+Deepspeed - insall..
+(/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current) [iluser@forest201 ilab]$ micromamba install conda-forge::deepspeed
+conda-forge/noarch                                  21.5MB @  17.9MB/s  1.2s
+conda-forge/linux-64                                45.5MB @  24.1MB/s  1.9s
+
+Pinned packages:
+
+  - python=3.12
+
+
+Transaction
+
+  Prefix: /panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current
+
+  Updating specs:
+
+   - conda-forge::deepspeed
+
+
+  Package       Version  Build                Channel           Size
+──────────────────────────────────────────────────────────────────────
+  Install:
+──────────────────────────────────────────────────────────────────────
+
+  + deepspeed    0.17.3  cpu_py312h9bd550b_0  conda-forge        3MB
+  + einops        0.8.1  pyhd8ed1ab_0         conda-forge     Cached
+  + hjson-py      3.1.0  pyhd8ed1ab_1         conda-forge       45kB
+  + libaio      0.3.113  h166bdaf_0           conda-forge       19kB
+  + py-cpuinfo    9.0.0  pyhd8ed1ab_1         conda-forge       26kB
+
+  Summary:
+
+  Install: 5 packages
+
+  Total download: 4MB
+
+──────────────────────────────────────────────────────────────────────
+
+
+Confirm changes: [Y/n] y
+
+Deepspeed import error: error: MissingCUDAException: CUDA_HOME does not exist, unable to compile CUDA op(s)
+(/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current) [iluser@forest201 ilab]$ mm list |grep deepspeed
+  deepspeed                             0.17.3          cpu_py312h9bd550b_0                  conda-forge
+
+I installed coda-toolkit into the kernel -> /panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current-bak
+
+Was getting an “import deepspeed” CUDA_HOME error not set
+
+Once I set that it imported ok.
+
+%env CUDA_HOME=/panfs/ccds02/app/modules/jupyter/ilab/dev/kernel
+
+env: CUDA_HOME/panfs/ccds02/app/modules/jupyter/ilab/dev/kernel
+
+Import deepspeed
+
+[2025-08-08 15:38:24,220] [INFO] [real_acceslerator.py:254:get_acceslerator] Setting ds_accelerator to cuda (auto detect)
+[2025-08-08 15:38:27,784] [INFO] [loggin.py:107:log_dist] [Rank -1] [TorchCheckpointEngine] Initialized with serialization = False
+
+Note to self: I originally thought that deepspeed needed the cuda-toolkit so I installed that into PyTorch-kernel-current-bak.
+But then I tested the above two lines using the PyTorch-kernel-current (without the coda-toolkit installed) and that was fine it didn’t throw an error.
+
+BOTTOM LINE.. IS IT NEEDS TO GO IN THERE BECAUSE ilab kernel (PyTorch) has it in there.
+
+8/4/25
+
+Sandy email:
+
+Hey Savannah, I was running a different notebook that uses rioxarray's open_rasterio() function. I used the gdal driver to try and open an HDF5 file, and got this error: 
+'AQUA_MODIS.20200620T115501.L2.OC.nc' not recognized as being in a supported file format. It could have been recognized by driver HDF5, but plugin gdal_HDF5.so is not available in your installation. You may install it with 'conda install -c conda-forge libgdal-hdf5'
+Is it possible to add the ligbal-hdf5 driver to allow for me to open this hdf5 file? I've been doing this exact code using the ilab-pytorch environment and it works. 
+(/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current) [iluser@forest201 ilab]$ micromamba install -c conda-forge libgdal-hdf5
+conda-forge/noarch                                  21.5MB @  22.7MB/s  1.0s
+conda-forge/linux-64                                45.6MB @  29.1MB/s  1.6s
+
+Pinned packages:
+
+  - python=3.12
+
+
+Transaction
+
+  Prefix: /panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current
+
+  Updating specs:
+
+   - libgdal-hdf5
+
+
+  Package         Version  Build        Channel          Size
+───────────────────────────────────────────────────────────────
+  Install:
+───────────────────────────────────────────────────────────────
+
+  + libgdal-hdf5   3.10.3  h966a9c2_12  conda-forge     653kB
+
+  Summary:
+
+  Install: 1 packages
+
+  Total download: 653kB
+
+───────────────────────────────────────────────────────────────
+
+
+Confirm changes: [Y/n] y
+
+Transaction starting
+libgdal-hdf5                                       653.0kB @ 113.8kB/s  0.0s
+Linking libgdal-hdf5-3.10.3-h966a9c2_12
+
+Transaction finished
+
+Still getting this error 
+
+In this Sandy-AQUA-qgdalhdf5-gest.ipynb still getting :
+
+RasterioIOError: '/explore/nobackup/people/ajkerr1/SatVision/OceanColor/chip_making/AQUA_MODIS.20200620T115501.L2.OC.nc' not recognized as being in a supported file format. It could have been recognized by driver HDF5, but plugin gdal_HDF5.so is not available in your installation. You may install it with 'conda install -c conda-forge libgdal-hdf5'
+
+Do not get this error when using ILAB Kernel (PyTorch), so looked at the difference between the DEV kernel and ILAB kernel (PyTorch)
+
+I installed libgdal-hdf5. Still getting error. I do see where ilab kernel (pytorch) does not get that error. I did a diff of both envs to see what's different.  As usual developers tried to get all smarty pants and break down the library into modules. They separated libgdal (which is what is in the ILAB pytorch)  out to make a light-weight libgdal-core (which is what is in the DEV kernel). Goes on to say all I would need to do in the DEV kernel is install the libgdal-hdf5 plugin. Unfortunately not the case. I'll let you know when I get an installation solution. 
+
+8/15/25
+
+In /panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current-bak
+
+Installed libgdal (which is what ilab kernel (PyTorch) has) and so it is peer to 
+libgdal-core it didn’t solve it.
+
+Then I uninstalled all libgdal and libgdal-core and reinstalled libgdal
+
+Then rasterio was not there.
+
+Then rioxarray wasn’t there
+
+Reinstalled them. 
+
+STILL GETTING liberal-hdf5 error
+
+8/19/25
+
+I linked dev kernel back to /panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current. And installed libgdal-hdf5 there.
+
+Because I had messed up bak by trying to install cuda-toolkit and libgdal. I have to start over with a new kernel.
+
+But I did install libgdal-hdf5 in dev now pointing to PyTorch kernel current.
+
+Here’s how I messed up PyTorch kernel current bak.. I did a blatant install of cudatoolkit and here’s what google says:
+
+However, with the introduction of CUDA 12 and later, conda-forge adopted a more modular approach. Instead of a single monolithic cudatoolkit package, the CUDA 12 and newer toolkits are often split into separate packages for individual libraries (e.g., cuda-nvcc, cuda-cudart, cuda-libraries-dev). This allows users to install only the specific components they require, reducing the overall installation size.
+
+Therefore, when installing the CUDA Toolkit from conda-forge on Linux:
+
+	•	For CUDA 11 and earlier: Install the cudatoolkit package for the desired version.
+Code
+
+    conda install -c conda-forge cudatoolkit=11.7
+	•	
+	•	
+	•	For CUDA 12 and later: Install the specific CUDA components you need, which may include cuda-nvcc, cuda-cudart, and other cuda-libraries-dev packages, in addition to the base cudatoolkit package if it's still present for runtime dependencies.
+	•	
+Code
+
+    conda install -c conda-forge cuda-nvcc cuda-cudart cuda-libraries-dev
+(Note: The exact package names for CUDA 12+ components might vary slightly, so consulting the conda-forge documentation or Anaconda.org for the specific version is recommended.)
+
+Check your NVIDIA Driver:
+	•	The NVIDIA driver is crucial for CUDA functionality. You need a driver that supports the CUDA version you intend to use.
+	•	You can check your driver version using nvidia-smi in the command line.
+	•	The nvidia-smi output will indicate the driver version. For example, it might say "Driver Version: 535.104.05". 
+
+
+9/2/25 
+
+1)Forest201- gdalinfo at command prompt is command NOT recognized. 
+But if I activate the DEV Kernel and do “gdalinfo /explore/nobackup/people/ajkerr1/SatVision/OceanColor/chip_making/AQUA_MODIS.20200620T115501.L2.OC.nc” I get output for the hdf5 file in question.
+
+GOOD!
+
+2)JUPHUB, GPU004 systems prompt - gdalinfo at command prompt is command IS recognized and..
+
+(/app/jupyter/ilab/jupyter-lab/prod) [sstrong@gpu004 dev]$ gdalinfo /explore/nobackup/people/ajkerr1/SatVision/OceanColor/chip_making/AQUA_MODIS.20200620T115501.L2.OC.nc
+ERROR 4: `/explore/nobackup/people/ajkerr1/SatVision/OceanColor/chip_making/AQUA_MODIS.20200620T115501.L2.OC.nc' not recognized as being in a supported file format. It could have been recognized by driver HDF5, but plugin gdal_HDF5.so is not available in your installation. You may install it with 'conda install -c conda-forge libgdal-hdf5'
+gdalinfo failed - unable to open '/explore/nobackup/people/ajkerr1/SatVision/OceanColor/chip_making/AQUA_MODIS.20200620T115501.L2.OC.nc'.
+
+Old gdal probably and only probably has the hdf4 lib
+
+DEV Kernel activation..
+
+(/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current) [sstrong@gpu004 dev]$ gdalinfo /explore/nobackup/people/ajkerr1/SatVision/OceanColor/chip_making/AQUA_MODIS.20200620T115501.L2.OC.nc |grep more
+  processing_control_input_parameters_fqfile=$OCDATAROOT/common/morel_fq.nc
+  processing_control_input_sources=A2020172115500.L1B_LAC,AQUA_MODIS.20200620T115501.GEO.hdf,GMAO_MERRA2.20200620T110000.MET.nc,GMAO_MERRA2.20200620T120000.MET.nc,GMAO_MERRA2.20200620T120000.MET.nc,GMAO_MERRA2.20200620T110000.MET.nc,GMAO_MERRA2.20200620T120000.MET.nc,GMAO_MERRA2.20200620T120000.MET.nc,anc_cor_file_28jan2014.nc,morel_fq.nc,polcor_modisa_2010b,aerosol_modisa,modisa_ocr_vc_nn,gebco_ocssw_v2020.nc,gebco_ocssw_v2020.nc,gebco_ocssw_v2020.nc,mld_climatology_woa1994.hdf,20200620120000-CMC-L4_GHRSST-SSTfnd-CMC0.1deg-GLOB-v02.0-fv03.0.nc,20200620120000-CMC-L4_GHRSST-SSTfnd-CMC0.1deg-GLOB-v02.0-fv03.0.nc,sss_climatology_woa2009.hdf,no2_climatology_v2013.hdf,alpha510_climatology.hdf,taua865_climatology.hdf,calcite_table-20170109.txt,owmc_lut.hdf,water_spectra.nc,xcal_modisa_axc_oc_v2.1d,bt_modisa.hdf
+(/panfs/ccds02/app/modules/jupyter/ilab/pytorch-kernel-current) [sstrong@gpu004 dev]$ gdalinfo /explore/nobackup/people/ajkerr1/SatVision/OceanColor/chip_making/AQUA_MODIS.20200620T115501.L2.OC.nc
+Driver: HDF5/Hierarchical Data Format Release 5
+Files: /explore/nobackup/people/ajkerr1/SatVision/OceanColor/chip_making/AQUA_MODIS.20200620T115501.L2.OC.nc
+Size is 512, 512
+Metadata:
+  bands_per_pixel_CLASS=DIMENSION_SCALE
+  bands_per_pixel_NAME=This is a netCDF dimension but not a netCDF variable.        16
+  bands_per_pixel__Netcdf4Dimid=2
+  cdm_data_type=swath
+.
+.
+
+
+JUPYTER NOTEBOOK
+
+ Selected the DEV kernel at the top but it does not default to the DEV kernel gdalinfo executable it runs the system installed gdal (which does not contain hdf5 plugin)
+
+Googling this explains that:
+
+Jupyter Notebook using the system-wide gdalinfo executable instead of the one associated with your kernel's environment typically arises from how the system's PATH environment variable is configured and how Jupyter resolves executable locations.
+
+Set the PATH in the JUP NOTEBOOK
+
+
+I had been thinking that the gdallib-hdf5 plugin (so hdf5 files can be read) wasn’t installed properly in the DEV kernel BUT.. at the system level I can activate the kernel and run a basic gdalinfo on an hdf5 file and I get the resulting metadata. 
+
+The big caveat has to do with the gdalinfo command running in a jupyter NB cell. This is because any gdal commands you run in a NB defaults to what’s installed on the system itself and not the Kernel in the NB. 
+
+So one would think you just need to update the PATH ENV VAR and then it works but that doesn’t seem to be the case. I tried resetting the PATH ENV VAR and inserting the kernel path both using the %env command in the cell and also using the sys.path. So I haven’t been successful in getting the same successful result output in the JUPLAB NB itself.
+
+
+9/8/25
+
+Solved - Making the gdal in JupHub env match what’s installed in the DEV kernel.
+
+journey towards conclusion..
+
+
+[iluser@forest201 jupyter-lab]$ export JL_ENV="/panfs/ccds02/app/modules/jupyter/ilab/jupyter-lab/ilab-juplab-ENV-current"
+[iluser@forest201 jupyter-lab]$ echo $JL_ENV
+/panfs/ccds02/app/modules/jupyter/ilab/jupyter-lab/ilab-juplab-ENV-current
+
+micromamba create -y -p $JL_ENV -c rapidsai -c conda-forge python=3.12.8 pip jupyterhub=5.0.0 jupyterlab=4.2.5 nb_conda_kernels nodejs pycurl notebook git ipympl jupyter_contrib_nbextensions dask-labextension dask-jobqueue panel plotly jupyterlab-nvdashboard jupyter_bokeh jupyterlab-git jupyterlab-github jupyter-server-proxy pyvista ipywidgets plotnine mizani tiler hydra-core datasets webdataset rasterstats optuna dask-geopandas h5py pyarrow earthaccess huggingface_hub matplotlib-scalebar yacs timm torchgeo py-opencv earthengine-api hdf4 gdal
+
+[iluser@forest201 jupyter-lab]$ mm activate /panfs/ccds02/app/modules/jupyter/ilab/jupyter-lab/ilab-juplab-ENV-current
+
+**********
+
+(/panfs/ccds02/app/modules/jupyter/ilab/jupyter-lab/ilab-juplab-ENV-current) [iluser@forest201 jupyter-lab]$ mm install -c conda-forge ipyleaflet=0.19.2
+conda-forge/linux-64                                        Using cache
+conda-forge/noarch                                          Using cache
+
+Pinned packages:
+
+  - python=3.12
+
+
+Transaction
+
+  Prefix: /panfs/ccds02/app/modules/jupyter/ilab/jupyter-lab/ilab-juplab-ENV-current
+
+  Updating specs:
+
+   - ipyleaflet=0.19.2
+
+
+  Package            Version  Build         Channel           Size
+────────────────────────────────────────────────────────────────────
+  Install:
+────────────────────────────────────────────────────────────────────
+
+  + branca             0.8.1  pyhd8ed1ab_0  conda-forge     Cached
+  + ipyleaflet        0.19.2  pyhd8ed1ab_1  conda-forge     Cached
+  + jupyter_leaflet   0.19.2  pyhd8ed1ab_1  conda-forge     Cached
+  + traittypes         0.2.1  pyh9f0ad1d_2  conda-forge     Cached
+
+**********
+
+(/panfs/ccds02/app/modules/jupyter/ilab/jupyter-lab/ilab-juplab-ENV-current) [iluser@forest201 jupyter-lab]$ mm install localtileserver
+conda-forge/linux-64                                        Using cache
+conda-forge/noarch                                          Using cache
+
+Pinned packages:
+
+  - python=3.12
+
+
+Transaction
+
+  Prefix: /panfs/ccds02/app/modules/jupyter/ilab/jupyter-lab/ilab-juplab-ENV-current
+
+  Updating specs:
+
+   - localtileserver
+
+
+  Package             Version  Build                Channel           Size
+────────────────────────────────────────────────────────────────────────────
+  Install:
+────────────────────────────────────────────────────────────────────────────
+
+  + aniso8601          10.0.0  pyhd8ed1ab_0         conda-forge     Cached
+  + cachelib           0.13.0  pyhd8ed1ab_1         conda-forge     Cached
+  + color-operations    0.2.0  py312h4f23490_1      conda-forge      132kB
+  + flask               3.1.2  pyhd8ed1ab_0         conda-forge       82kB
+  + flask-caching       2.3.1  pyhd8ed1ab_0         conda-forge     Cached
+  + flask-cors          6.0.1  pyhe01879c_0         conda-forge     Cached
+  + flask-restx         1.3.0  pyhd8ed1ab_1         conda-forge     Cached
+  + itsdangerous        2.2.0  pyhd8ed1ab_1         conda-forge     Cached
+  + localtileserver    0.10.6  pyhd8ed1ab_0         conda-forge     Cached
+  + morecantile         6.2.0  pyhd8ed1ab_0         conda-forge     Cached
+  + numexpr            2.10.2  mkl_py312hacae085_0  conda-forge     Cached
+  + pystac             1.13.0  pyhd8ed1ab_0         conda-forge     Cached
+  + rio-cogeo           5.4.2  pyhd8ed1ab_0         conda-forge     Cached
+  + rio-tiler           7.8.1  pyhd8ed1ab_0         conda-forge     Cached
+  + server-thread       0.3.0  pyhd8ed1ab_0         conda-forge     Cached
+  + uvicorn            0.35.0  pyh31011fe_0         conda-forge     Cached
+  + werkzeug            3.1.3  pyhd8ed1ab_1         conda-forge     Cached
+
+Switch the DEV LINK
